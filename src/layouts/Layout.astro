@@ -36,6 +36,7 @@ const base = import.meta.env.BASE_URL;
           <li><a href="/roadmap" class:list={['nav__link', { 'nav__link--active': currentPath === '/roadmap' || currentPath === '/roadmap/' }]}>Roadmap</a></li>
           <li><a href="/faq" class:list={['nav__link', { 'nav__link--active': currentPath === '/faq' || currentPath === '/faq/' }]}>FAQ</a></li>
           <li><a href="/glossary" class:list={['nav__link', { 'nav__link--active': currentPath === '/glossary' || currentPath === '/glossary/' }]}>Glossary</a></li>
+          <li><a href="/decision-support" class:list={['nav__link', 'nav__link--cta', { 'nav__link--active': currentPath === '/decision-support' || currentPath === '/decision-support/' }]}>Decision Support</a></li>
         </ul>
       </div>
     </nav>
@@ -60,6 +61,7 @@ const base = import.meta.env.BASE_URL;
               <li><a href="/roadmap">Roadmap</a></li>
               <li><a href="/faq">FAQ</a></li>
               <li><a href="/glossary">Glossary</a></li>
+              <li><a href="/decision-support">Decision Support</a></li>
             </ul>
           </div>
           <div class="footer__links">
@@ -161,6 +163,21 @@ const base = import.meta.env.BASE_URL;
     background: rgba(201, 168, 76, 0.12);
     color: var(--color-navy);
     font-weight: 600;
+  }
+
+  .nav__link.nav__link--cta {
+    background: var(--color-gold);
+    color: var(--color-navy);
+    border-radius: var(--radius-sm);
+  }
+
+  .nav__link.nav__link--cta:hover {
+    background: var(--color-gold-light);
+    color: var(--color-navy);
+  }
+
+  .nav__link.nav__link--cta.nav__link--active {
+    background: var(--color-gold-light);
   }
 
   /* Hamburger */
