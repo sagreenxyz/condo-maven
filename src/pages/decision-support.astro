@@ -1,0 +1,1423 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+  title="Buyer Decision Support"
+  description="CondoMaven's comprehensive decision support tool for first-time condo buyers — covering owner-occupancy, rental strategy, due diligence, and exit planning."
+>
+  <!-- ===== Page Hero ===== -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="badge badge-gold">Decision Support Tool</span>
+      <h1>Your Condo Buying Decision Guide</h1>
+      <p>
+        Use this interactive guide to evaluate your condo purchase from every angle — whether
+        you plan to live there, rent it out, or maximize your investment returns when you sell.
+        Built by experts. Designed for novice buyers.
+      </p>
+      <div class="hero-tabs" role="tablist" aria-label="Buyer strategy">
+        <button class="hero-tab hero-tab--active" data-tab="hybrid" role="tab" aria-selected="true">🏠+💼 Live &amp; Rent</button>
+        <button class="hero-tab" data-tab="owner" role="tab" aria-selected="false">🏠 Live There</button>
+        <button class="hero-tab" data-tab="landlord" role="tab" aria-selected="false">💼 Rent It Out</button>
+        <button class="hero-tab" data-tab="investor" role="tab" aria-selected="false">📈 Sell for Profit</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Strategy Panels ===== -->
+  <section class="section" id="strategy">
+    <div class="container">
+
+      <!-- HYBRID: Live & Rent -->
+      <div class="strategy-panel strategy-panel--active" id="tab-hybrid">
+        <div class="strategy-header">
+          <div class="strategy-icon">🏠💼</div>
+          <div>
+            <h2>Live There &amp; Rent It Out (Hybrid Strategy)</h2>
+            <p class="text-muted">The most flexible approach — maximize your options by living there first, then converting to a rental, all while preserving an exit path for a profitable sale.</p>
+          </div>
+        </div>
+        <div class="callout callout--info">
+          <strong>Expert Insight:</strong> The hybrid strategy is the single best approach for novice buyers. You get owner-occupant financing rates (lower down payment, lower interest), build equity while living there, learn the building intimately before becoming a landlord, and avoid the hardest challenge in rental investing — finding the right property while buying blind.
+        </div>
+        <div class="two-col">
+          <div>
+            <h3>Phase 1: Owner-Occupancy (Years 1–2)</h3>
+            <ul class="check-list">
+              <li>Qualify for owner-occupant financing (typically 5–10% down vs. 20–25% for investors)</li>
+              <li>Live in the unit to understand building dynamics, neighbors, HOA culture, and noise patterns</li>
+              <li>Attend at least 2–3 HOA board meetings to assess governance quality</li>
+              <li>Document everything: maintenance issues, neighbor complaints, seasonal quirks</li>
+              <li>Review the HOA's 5-year capital plan and upcoming special assessments</li>
+              <li>Build relationships with building management and maintenance staff</li>
+              <li>Verify rental rules in CC&amp;Rs before you buy — ensure renting is permitted</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Phase 2: Transition to Rental</h3>
+            <ul class="check-list">
+              <li>Notify your mortgage lender if required (investment property terms may apply if you refinance)</li>
+              <li>Inform HOA of rental and obtain required approvals or registrations</li>
+              <li>Update your insurance to a landlord policy (dwelling + liability)</li>
+              <li>Price rent based on a current CMA — target 1.0–1.1% of purchase price monthly as a baseline</li>
+              <li>Draft a lease addendum that incorporates all HOA rules as tenant obligations</li>
+              <li>Screen tenants rigorously: income ≥3× rent, credit ≥650, verifiable rental history</li>
+              <li>Consider moving into a second unit if you're growing a portfolio</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout">
+          <strong>Quality-of-Life Preservation:</strong> Before renting, make repairs and upgrades that protect the unit's value and attract quality tenants. Quality tenants treat units well. Invest in fresh paint, professional cleaning, and functioning appliances. The better the unit shows, the better the tenant pool.
+        </div>
+        <h3>Your Hybrid Decision Checklist</h3>
+        <div class="checklist-grid" id="checklist-hybrid">
+          <label class="checklist-item"><input type="checkbox" /> CC&amp;Rs explicitly allow renting after owner-occupancy period (if any)</label>
+          <label class="checklist-item"><input type="checkbox" /> Rental cap has room — building is under the rental percentage threshold</label>
+          <label class="checklist-item"><input type="checkbox" /> HOA financials are healthy (reserve fund ≥70% funded)</label>
+          <label class="checklist-item"><input type="checkbox" /> Unit can cash-flow as a rental after PITI + HOA fees</label>
+          <label class="checklist-item"><input type="checkbox" /> No pending or expected special assessments in the next 3 years</label>
+          <label class="checklist-item"><input type="checkbox" /> Building is "warrantable" — future buyers can get conventional financing</label>
+          <label class="checklist-item"><input type="checkbox" /> Unit is in a rental-demand neighborhood (employment hubs, transit, amenities)</label>
+          <label class="checklist-item"><input type="checkbox" /> You have 6+ months of PITI reserves in savings</label>
+        </div>
+        <div id="checklist-hybrid-score" class="score-display" aria-live="polite"></div>
+      </div>
+
+      <!-- OWNER: Live There -->
+      <div class="strategy-panel" id="tab-owner">
+        <div class="strategy-header">
+          <div class="strategy-icon">🏠</div>
+          <div>
+            <h2>Live There — Owner-Occupant Strategy</h2>
+            <p class="text-muted">Prioritizing personal use and quality of life while building equity through ownership.</p>
+          </div>
+        </div>
+        <div class="callout callout--info">
+          <strong>Expert Insight:</strong> Even as a primary residence, buying smart means thinking like an investor. The best homes are also the best investments — focus on buildings with strong HOA governance, desirable locations, and manageable monthly carrying costs so you can exit profitably whenever you choose.
+        </div>
+        <div class="two-col">
+          <div>
+            <h3>Quality-of-Life Factors</h3>
+            <ul class="check-list">
+              <li>Assess noise levels: visit on a weekday evening, weekend morning, and at night</li>
+              <li>Evaluate neighbors — review HOA violation logs and meeting minutes for disputes</li>
+              <li>Check natural light and ventilation in the actual unit (not just model units)</li>
+              <li>Test cell signal, Wi-Fi coverage, and internet provider options in the unit</li>
+              <li>Evaluate parking: how many spaces, guest parking availability, wait lists for additional spaces</li>
+              <li>Review pet policies before purchasing if you have or plan to have pets</li>
+              <li>Assess storage: in-unit closets, HOA storage lockers, bike storage</li>
+              <li>Confirm building security: entry systems, camera coverage, incident history</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Building Health for Long-Term Living</h3>
+            <ul class="check-list">
+              <li>Review 3 years of HOA meeting minutes for recurring issues or deferred maintenance</li>
+              <li>Ask management company about common noise complaints and resolution process</li>
+              <li>Inspect common areas: cleanliness, maintenance quality, amenity condition</li>
+              <li>Evaluate the HOA board: are they responsive, professional, and financially responsible?</li>
+              <li>Review building envelope (roof, windows, façade) for deferred maintenance signs</li>
+              <li>Confirm HVAC systems: individual unit control vs. central system (central = less control)</li>
+              <li>Check utility billing: individually metered vs. master-metered (individual is better)</li>
+            </ul>
+          </div>
+        </div>
+        <h3>Owner-Occupant Decision Checklist</h3>
+        <div class="checklist-grid" id="checklist-owner">
+          <label class="checklist-item"><input type="checkbox" /> Unit layout genuinely fits your lifestyle (not just square footage)</label>
+          <label class="checklist-item"><input type="checkbox" /> Monthly costs (PITI + HOA) stay under 28–33% of gross income</label>
+          <label class="checklist-item"><input type="checkbox" /> Building amenities match your daily needs</label>
+          <label class="checklist-item"><input type="checkbox" /> Visited unit at multiple times of day and week</label>
+          <label class="checklist-item"><input type="checkbox" /> HOA rules align with your lifestyle (pets, guests, noise, smoking)</label>
+          <label class="checklist-item"><input type="checkbox" /> No major HOA litigation or pending special assessments</label>
+          <label class="checklist-item"><input type="checkbox" /> Neighborhood amenities meet your daily needs (grocery, transit, work commute)</label>
+          <label class="checklist-item"><input type="checkbox" /> Comparable sales support the purchase price (confirmed with CMA)</label>
+        </div>
+        <div id="checklist-owner-score" class="score-display" aria-live="polite"></div>
+      </div>
+
+      <!-- LANDLORD: Rent It Out -->
+      <div class="strategy-panel" id="tab-landlord">
+        <div class="strategy-header">
+          <div class="strategy-icon">💼</div>
+          <div>
+            <h2>Pure Rental Investment Strategy</h2>
+            <p class="text-muted">Buying as an investment property from day one — maximizing cash flow and long-term appreciation.</p>
+          </div>
+        </div>
+        <div class="callout callout--info">
+          <strong>Expert Insight:</strong> Buying an investment condo without living there first is harder but very doable. The key is buying in a market you understand deeply, running your numbers conservatively (budget 8% vacancy, 10% maintenance, and annual HOA fee increases of 3–5%), and selecting a building with strong demand from renters — not just buyers.
+        </div>
+        <div class="two-col">
+          <div>
+            <h3>Cash Flow Analysis</h3>
+            <ul class="check-list">
+              <li>Gross Monthly Rent (market rate, confirmed by CMA)</li>
+              <li>Less: Vacancy allowance (5–8% of gross rent)</li>
+              <li>Less: Property management fee (8–12% if using a PM)</li>
+              <li>Less: Monthly HOA fee</li>
+              <li>Less: Property taxes (monthly equivalent)</li>
+              <li>Less: Landlord insurance premium (monthly equivalent)</li>
+              <li>Less: CapEx reserve (5–10% of gross rent)</li>
+              <li>Less: Mortgage P&amp;I</li>
+              <li>= <strong>Net Monthly Cash Flow</strong> (positive = cash flow positive)</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Rental Demand Indicators</h3>
+            <ul class="check-list">
+              <li>Proximity to employment centers, hospitals, universities, or tech campuses</li>
+              <li>Walk score ≥70 (walkable urban neighborhoods retain tenants longer)</li>
+              <li>Days-on-market for comparable rentals under 21 days (tight rental market)</li>
+              <li>Rental vacancy rate for the submarket under 5%</li>
+              <li>Building allows renting immediately upon purchase (check CC&amp;Rs)</li>
+              <li>No rental cap restrictions that could affect future financing</li>
+              <li>Strong historical rent growth in the neighborhood (3–5% annually)</li>
+            </ul>
+          </div>
+        </div>
+        <h3>Rental Investment Decision Checklist</h3>
+        <div class="checklist-grid" id="checklist-landlord">
+          <label class="checklist-item"><input type="checkbox" /> Cash-on-cash return ≥6% at conservative rental assumptions</label>
+          <label class="checklist-item"><input type="checkbox" /> Gross rent multiplier (purchase price ÷ annual gross rent) under 16</label>
+          <label class="checklist-item"><input type="checkbox" /> CC&amp;Rs permit renting without an HOA approval waiting period</label>
+          <label class="checklist-item"><input type="checkbox" /> Building is under 30% investor-owned (maintains warrantability)</label>
+          <label class="checklist-item"><input type="checkbox" /> Reserve fund ≥50% funded (protects against special assessment hits)</label>
+          <label class="checklist-item"><input type="checkbox" /> Comparable rentals in building turn in under 21 days</label>
+          <label class="checklist-item"><input type="checkbox" /> Property manager identified or self-management plan confirmed</label>
+          <label class="checklist-item"><input type="checkbox" /> You have 6 months of all expenses in reserve (PITI + HOA)</label>
+        </div>
+        <div id="checklist-landlord-score" class="score-display" aria-live="polite"></div>
+      </div>
+
+      <!-- INVESTOR: Sell for Profit -->
+      <div class="strategy-panel" id="tab-investor">
+        <div class="strategy-header">
+          <div class="strategy-icon">📈</div>
+          <div>
+            <h2>Investment &amp; Exit Strategy — Maximize Your Gains</h2>
+            <p class="text-muted">Structured planning for appreciation, value-add improvements, and a profitable exit — whether through traditional sale, 1031 exchange, or portfolio liquidation.</p>
+          </div>
+        </div>
+        <div class="callout callout--info">
+          <strong>Expert Insight:</strong> The best time to plan your exit is before you buy. Every decision — from which floor you buy on to how you title the property — affects your tax bill and resale appeal. Investors who think about the exit first and the entry second consistently outperform those who do the reverse.
+        </div>
+        <div class="two-col">
+          <div>
+            <h3>Value Appreciation Drivers</h3>
+            <ul class="check-list">
+              <li>Location: proximity to transit, employment hubs, and urban infill development</li>
+              <li>Floor and view: higher floors with unobstructed views command 5–15% premiums</li>
+              <li>Unit size and layout: 2BR/2BA universally outsells 1BR and studios</li>
+              <li>Parking: deeded parking space is a significant value-add (worth $20K–$50K+ in urban markets)</li>
+              <li>Storage: additional storage locker or in-unit storage is a selling point</li>
+              <li>Building amenities: rooftop, concierge, gym add appeal for both buyers and renters</li>
+              <li>HOA health: buyers' agents screen HOA financials — a healthy HOA expands your buyer pool</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Exit Strategy Options</h3>
+            <ul class="check-list">
+              <li><strong>Traditional Sale:</strong> List on MLS, pay selling agent commission (2.5–3%), capital gains tax applies (long-term if held &gt;1 year)</li>
+              <li><strong>Primary Residence Exclusion:</strong> Live in unit 2 of last 5 years → exclude $250K ($500K married) in capital gains</li>
+              <li><strong>1031 Exchange:</strong> Defer capital gains by reinvesting into a "like-kind" property within 180 days of sale</li>
+              <li><strong>Convert to Short-Term Rental:</strong> If CC&amp;Rs allow, STR can significantly boost income in the final year before sale</li>
+              <li><strong>Sell to Another Investor:</strong> Market as a "turnkey rental" with tenant in place — some investors pay a premium for immediate cash flow</li>
+              <li><strong>Owner-Finance:</strong> Carry the mortgage yourself to generate interest income and potentially higher sale price</li>
+            </ul>
+          </div>
+        </div>
+        <h3>Exit Planning Decision Checklist</h3>
+        <div class="checklist-grid" id="checklist-investor">
+          <label class="checklist-item"><input type="checkbox" /> Modeled target sale price with comps before buying (know your exit number up front)</label>
+          <label class="checklist-item"><input type="checkbox" /> Verified holding period strategy aligns with your tax situation (short vs. long-term gains)</label>
+          <label class="checklist-item"><input type="checkbox" /> Building warrantability confirmed — buyer pool will include conventional finance buyers</label>
+          <label class="checklist-item"><input type="checkbox" /> Unit improvements planned will actually add resale value (consult local agent before renovating)</label>
+          <label class="checklist-item"><input type="checkbox" /> CC&amp;Rs reviewed for any resale restrictions, right-of-first-refusal, or flip taxes</label>
+          <label class="checklist-item"><input type="checkbox" /> Entity structure reviewed with CPA (personal vs. LLC vs. trust) for optimal tax treatment</label>
+          <label class="checklist-item"><input type="checkbox" /> Depreciation recapture implications understood (consult CPA before selling)</label>
+          <label class="checklist-item"><input type="checkbox" /> 1031 exchange timeline and replacement property strategy documented</label>
+        </div>
+        <div id="checklist-investor-score" class="score-display" aria-live="polite"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Financial Calculator ===== -->
+  <section class="section section--alt" id="calculator">
+    <div class="container">
+      <div class="section-label">Financial Tool</div>
+      <h2 class="text-center">Quick Deal Analyzer</h2>
+      <p class="text-center text-muted" style="max-width:560px; margin:0.75rem auto 2.5rem;">
+        Enter your deal numbers to instantly see cash flow, cap rate, cash-on-cash return,
+        and a purchase decision rating.
+      </p>
+      <div class="calc-grid">
+        <div class="calc-inputs">
+          <h3>Purchase Details</h3>
+          <div class="form-group">
+            <label for="purchasePrice">Purchase Price ($)</label>
+            <input type="number" id="purchasePrice" class="form-input" value="350000" min="0" step="1000" />
+          </div>
+          <div class="form-group">
+            <label for="downPayment">Down Payment (%)</label>
+            <input type="number" id="downPayment" class="form-input" value="20" min="3" max="100" step="1" />
+          </div>
+          <div class="form-group">
+            <label for="interestRate">Interest Rate (%)</label>
+            <input type="number" id="interestRate" class="form-input" value="7.0" min="1" max="20" step="0.1" />
+          </div>
+          <div class="form-group">
+            <label for="loanTerm">Loan Term (years)</label>
+            <input type="number" id="loanTerm" class="form-input" value="30" min="10" max="30" step="5" />
+          </div>
+          <h3 style="margin-top:1.5rem;">Monthly Income &amp; Expenses</h3>
+          <div class="form-group">
+            <label for="monthlyRent">Monthly Rent ($)</label>
+            <input type="number" id="monthlyRent" class="form-input" value="2200" min="0" step="50" />
+          </div>
+          <div class="form-group">
+            <label for="hoaFee">Monthly HOA Fee ($)</label>
+            <input type="number" id="hoaFee" class="form-input" value="450" min="0" step="25" />
+          </div>
+          <div class="form-group">
+            <label for="propertyTax">Annual Property Tax ($)</label>
+            <input type="number" id="propertyTax" class="form-input" value="4200" min="0" step="100" />
+          </div>
+          <div class="form-group">
+            <label for="insurance">Annual Insurance ($)</label>
+            <input type="number" id="insurance" class="form-input" value="1200" min="0" step="100" />
+          </div>
+          <div class="form-group">
+            <label for="vacancyRate">Vacancy Rate (%)</label>
+            <input type="number" id="vacancyRate" class="form-input" value="6" min="0" max="30" step="1" />
+          </div>
+          <div class="form-group">
+            <label for="mgmtFee">Property Mgmt Fee (% of rent)</label>
+            <input type="number" id="mgmtFee" class="form-input" value="10" min="0" max="20" step="1" />
+          </div>
+          <div class="form-group">
+            <label for="capexRate">CapEx Reserve (% of rent)</label>
+            <input type="number" id="capexRate" class="form-input" value="7" min="0" max="20" step="1" />
+          </div>
+          <div class="form-group">
+            <label for="closingCostsPct">Closing Costs (% of price)</label>
+            <input type="number" id="closingCostsPct" class="form-input" value="3" min="0" max="10" step="0.5" />
+          </div>
+          <button class="btn btn-primary" id="calcBtn" style="margin-top:1rem; width:100%;">Calculate →</button>
+        </div>
+        <div class="calc-results" id="calcResults">
+          <h3>Analysis Results</h3>
+          <p class="text-muted" style="font-size:0.9rem;">Fill in the fields and click Calculate to see your deal analysis.</p>
+          <div class="result-cards" id="resultCards" style="display:none;">
+            <div class="result-card">
+              <div class="result-card__label">Monthly Mortgage (P&amp;I)</div>
+              <div class="result-card__value" id="r-mortgage">—</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card__label">Effective Gross Income / mo</div>
+              <div class="result-card__value" id="r-egi">—</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card__label">Total Monthly Expenses</div>
+              <div class="result-card__value" id="r-expenses">—</div>
+            </div>
+            <div class="result-card result-card--highlight">
+              <div class="result-card__label">Net Monthly Cash Flow</div>
+              <div class="result-card__value" id="r-cashflow">—</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card__label">Cap Rate (NOI / Price)</div>
+              <div class="result-card__value" id="r-caprate">—</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card__label">Cash-on-Cash Return</div>
+              <div class="result-card__value" id="r-coc">—</div>
+            </div>
+            <div class="result-card">
+              <div class="result-card__label">Gross Rent Multiplier</div>
+              <div class="result-card__value" id="r-grm">—</div>
+            </div>
+            <div class="result-card result-card--highlight">
+              <div class="result-card__label">Total Cash Required</div>
+              <div class="result-card__value" id="r-totalcash">—</div>
+            </div>
+          </div>
+          <div id="dealRating" class="deal-rating" style="display:none;"></div>
+          <div class="callout callout--info" style="margin-top:1.5rem; font-size:0.85rem;">
+            <strong>Note:</strong> This calculator is for educational estimation only. Actual returns vary based on local market conditions, financing terms, and property-specific factors. Consult a licensed CPA and financial advisor before making investment decisions.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Due Diligence Framework ===== -->
+  <section class="section" id="due-diligence">
+    <div class="container">
+      <div class="section-label">Expert Guidance</div>
+      <h2 class="text-center">The Master Due Diligence Framework</h2>
+      <p class="text-center text-muted" style="max-width:620px; margin:0.75rem auto 2.5rem;">
+        Before you sign anything, run every prospective condo through these five critical lenses.
+        Missing any one of them can turn a good deal into a financial nightmare.
+      </p>
+      <div class="dd-grid">
+
+        <div class="dd-section">
+          <div class="dd-section__header">
+            <span class="dd-section__num">01</span>
+            <h3>HOA Financial Health</h3>
+          </div>
+          <p class="text-muted">The HOA is your silent financial partner. A weak HOA can devastate your investment even if you own the best unit in the building.</p>
+          <div class="dd-items">
+            <div class="dd-item dd-item--critical">
+              <span class="dd-item__icon">🚨</span>
+              <div>
+                <strong>Reserve Fund Below 30% Funded</strong>
+                <p>Walk away or price in a major special assessment. Underfunded reserves mean large, unpredictable expenses for all owners.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--warning">
+              <span class="dd-item__icon">⚠️</span>
+              <div>
+                <strong>Reserve Fund 30–70% Funded</strong>
+                <p>Proceed with caution. Review the reserve study in detail and understand what capital expenditures are coming in the next 5–10 years.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--good">
+              <span class="dd-item__icon">✅</span>
+              <div>
+                <strong>Reserve Fund ≥70% Funded</strong>
+                <p>Green light. The HOA is financially responsible and prepared for future capital needs.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--critical">
+              <span class="dd-item__icon">🚨</span>
+              <div>
+                <strong>Active Litigation Against or By the HOA</strong>
+                <p>Major lenders (Fannie Mae, Freddie Mac) will not finance condos in buildings with active litigation. This makes the unit nearly unsellable to conventional buyers.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--warning">
+              <span class="dd-item__icon">⚠️</span>
+              <div>
+                <strong>HOA Fees Have Risen &gt;5% Annually for 3+ Years</strong>
+                <p>This rate of increase, if sustained, can erode cash flow significantly. Understand the driver before buying.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dd-section">
+          <div class="dd-section__header">
+            <span class="dd-section__num">02</span>
+            <h3>Warrantability &amp; Financing Risk</h3>
+          </div>
+          <p class="text-muted">A non-warrantable condo restricts your financing options and severely limits your future buyer pool — both are costly problems.</p>
+          <div class="dd-items">
+            <div class="dd-item dd-item--critical">
+              <span class="dd-item__icon">🚨</span>
+              <div>
+                <strong>&gt;35% Investor-Owned Units</strong>
+                <p>Fannie Mae and Freddie Mac impose concentration limits. Above this threshold, the project may lose warrantability, pushing all buyers to portfolio lenders at higher rates.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--critical">
+              <span class="dd-item__icon">🚨</span>
+              <div>
+                <strong>Single Entity Owns &gt;10% of Units</strong>
+                <p>A developer or investor holding a large block of units creates financing risk for all other owners. If that entity defaults or can't pay HOA fees, the entire building suffers.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--warning">
+              <span class="dd-item__icon">⚠️</span>
+              <div>
+                <strong>Commercial Space &gt;35% of Building Square Footage</strong>
+                <p>High commercial ratios can affect Fannie Mae eligibility. Confirm with a lender before proceeding.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--good">
+              <span class="dd-item__icon">✅</span>
+              <div>
+                <strong>Fannie Mae/Freddie Mac Approved Project List</strong>
+                <p>Many lenders maintain lists of pre-approved condo projects. Ask your lender to check the project — if it's pre-approved, your financing will be significantly smoother.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dd-section">
+          <div class="dd-section__header">
+            <span class="dd-section__num">03</span>
+            <h3>Rental Restriction Analysis</h3>
+          </div>
+          <p class="text-muted">CC&amp;Rs can completely block your rental strategy. Read every word before you fall in love with a unit.</p>
+          <div class="dd-items">
+            <div class="dd-item dd-item--critical">
+              <span class="dd-item__icon">🚨</span>
+              <div>
+                <strong>Short-Term Rental Ban (Airbnb/VRBO)</strong>
+                <p>Most urban condo buildings prohibit leases under 30 days. If STR is core to your strategy, this is a deal-breaker.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--critical">
+              <span class="dd-item__icon">🚨</span>
+              <div>
+                <strong>Rental Cap Already Near Limit</strong>
+                <p>If the building is at or near its rental percentage cap (e.g., "no more than 20% of units may be rented"), you may be legally barred from renting even if your CC&amp;Rs permit it in theory. Verify current occupancy ratios.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--warning">
+              <span class="dd-item__icon">⚠️</span>
+              <div>
+                <strong>Owner-Occupancy Period Required (1–2 Years)</strong>
+                <p>Some buildings require you to live in the unit for 1–2 years before renting. This isn't a deal-breaker for the hybrid strategy, but it does affect your cash flow timeline.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--warning">
+              <span class="dd-item__icon">⚠️</span>
+              <div>
+                <strong>HOA Board Approval Required for Each Tenant</strong>
+                <p>Some HOAs require tenant applications to be reviewed and approved. This adds time and risk to your tenant placement process.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--good">
+              <span class="dd-item__icon">✅</span>
+              <div>
+                <strong>Unrestricted Long-Term Leasing Permitted</strong>
+                <p>The ideal scenario for investors. No cap, no waiting period, no board approval required for long-term tenants (30 days or more).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dd-section">
+          <div class="dd-section__header">
+            <span class="dd-section__num">04</span>
+            <h3>Physical Condition &amp; Capital Needs</h3>
+          </div>
+          <p class="text-muted">The unit you can see is only part of the story. The building systems you can't see can cost you far more.</p>
+          <div class="dd-items">
+            <div class="dd-item dd-item--critical">
+              <span class="dd-item__icon">🚨</span>
+              <div>
+                <strong>Building Envelope Failures (Roof, Windows, Façade)</strong>
+                <p>Water intrusion from a failing building envelope is an HOA responsibility, but repair costs frequently result in large special assessments. Look for water stains, efflorescence, or cracking in common areas.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--critical">
+              <span class="dd-item__icon">🚨</span>
+              <div>
+                <strong>Aging Building Systems Without Reserve Funding</strong>
+                <p>Elevators, parking structures, and HVAC plants are expensive to replace. A building built in the 1980s–1990s may face $10M+ in capital needs over the next decade. Verify the reserve study covers these items.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--warning">
+              <span class="dd-item__icon">⚠️</span>
+              <div>
+                <strong>Recent Special Assessments Not Disclosed in Listing</strong>
+                <p>Always ask explicitly: "Are there any special assessments that have been approved but not yet billed?" Sellers may legally disclose only what they know — ask the HOA manager directly.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--good">
+              <span class="dd-item__icon">✅</span>
+              <div>
+                <strong>Recent Completed Capital Projects (Roof, Elevators, etc.)</strong>
+                <p>A building that just replaced its roof or renovated its elevators using reserves (not a special assessment) is a green flag. Major capital needs are behind it, not ahead of it.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dd-section">
+          <div class="dd-section__header">
+            <span class="dd-section__num">05</span>
+            <h3>Market &amp; Location Intelligence</h3>
+          </div>
+          <p class="text-muted">Even the best unit in the best building fails if the market moves against you. Macro matters.</p>
+          <div class="dd-items">
+            <div class="dd-item dd-item--critical">
+              <span class="dd-item__icon">🚨</span>
+              <div>
+                <strong>Oversupply of Condo Inventory in the Submarket</strong>
+                <p>Rising days-on-market, price reductions, and a glut of unsold units all signal oversupply. In oversupplied markets, appreciation stalls and rental competition intensifies.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--warning">
+              <span class="dd-item__icon">⚠️</span>
+              <div>
+                <strong>Single-Employer-Dependent Neighborhood</strong>
+                <p>Markets dominated by one employer (military base, factory, university) face outsized risk if that employer scales back. Diversify if possible.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--good">
+              <span class="dd-item__icon">✅</span>
+              <div>
+                <strong>Transit Infrastructure Investment Planned or Underway</strong>
+                <p>New transit stops, bike lanes, and urban infill development reliably drive condo appreciation. Look for planned transit expansions in the city's capital plan.</p>
+              </div>
+            </div>
+            <div class="dd-item dd-item--good">
+              <span class="dd-item__icon">✅</span>
+              <div>
+                <strong>Strong Job Growth &amp; Population Inflow</strong>
+                <p>Markets attracting net new residents and jobs sustain rental demand and price appreciation. Check U.S. Census migration data and Bureau of Labor Statistics metro employment trends.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Scenarios & Pitfalls ===== -->
+  <section class="section section--alt" id="scenarios">
+    <div class="container">
+      <div class="section-label">Critical Scenarios</div>
+      <h2 class="text-center">Situations Every Buyer Must Plan For</h2>
+      <p class="text-center text-muted" style="max-width:600px; margin:0.75rem auto 2.5rem;">
+        These are the scenarios novice buyers don't anticipate — and that experienced investors plan for before signing.
+      </p>
+      <div class="accordion" id="scenarioAccordion">
+
+        <div class="accordion-item">
+          <button class="accordion-btn" aria-expanded="false">
+            <span class="accordion-icon">😱</span>
+            <span>The Surprise Special Assessment (Post-Purchase)</span>
+            <span class="accordion-chevron">▼</span>
+          </button>
+          <div class="accordion-panel">
+            <p><strong>What happens:</strong> After you close, the HOA votes a $20,000–$50,000+ special assessment for emergency repairs or reserve fund replenishment.</p>
+            <p><strong>How to protect yourself:</strong></p>
+            <ul>
+              <li>Negotiate a special assessment clause: require the seller to pay any assessments approved before closing, even if not yet billed</li>
+              <li>Review 3 years of meeting minutes for any deferred maintenance discussions</li>
+              <li>Ask the HOA manager directly: "Are there any capital projects being discussed that aren't yet approved?"</li>
+              <li>Review the reserve study for any projects expected in the next 2–3 years</li>
+              <li>Keep 3–6 months of HOA fees in a separate reserve account as a buffer</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn" aria-expanded="false">
+            <span class="accordion-icon">🚫</span>
+            <span>You Can't Rent — The Rental Cap Surprise</span>
+            <span class="accordion-chevron">▼</span>
+          </button>
+          <div class="accordion-panel">
+            <p><strong>What happens:</strong> You buy a unit intending to rent it, but discover the building is at its rental cap — you're legally barred from renting until another owner stops renting.</p>
+            <p><strong>How to protect yourself:</strong></p>
+            <ul>
+              <li>Get the current rental cap percentage AND current rented percentage from the HOA manager in writing before making an offer</li>
+              <li>Add a due-diligence contingency specifically covering rental eligibility</li>
+              <li>If the building is within 2–3 units of its cap, treat it as if there is no rental option</li>
+              <li>Ask if there is a wait list, and if so, how long current wait is</li>
+              <li>Verify the cap is in the CC&amp;Rs (contractual, very difficult to change) vs. HOA rules (board can amend more easily)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn" aria-expanded="false">
+            <span class="accordion-icon">📉</span>
+            <span>You Can't Sell — The Financing Wall</span>
+            <span class="accordion-chevron">▼</span>
+          </button>
+          <div class="accordion-panel">
+            <p><strong>What happens:</strong> When you try to sell, buyers can't get conventional financing because the building has lost warrantability (too many investors, pending litigation, or underfunded reserves). Your buyer pool shrinks to cash buyers only, suppressing your sale price by 10–20%.</p>
+            <p><strong>How to protect yourself:</strong></p>
+            <ul>
+              <li>Before buying, confirm current warrantability with your lender (run the condo questionnaire)</li>
+              <li>Monitor investor concentration annually — if it rises above 30%, begin planning your exit</li>
+              <li>Attend HOA meetings; vote against policies that accelerate dewarrantability</li>
+              <li>Price your exit before the market gets to a financing wall — don't be the last one out</li>
+              <li>Consider selling to another investor (cash buyer) as a backup if retail buyers can't finance</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn" aria-expanded="false">
+            <span class="accordion-icon">💸</span>
+            <span>Problem Tenant in a Condo (HOA Friction)</span>
+            <span class="accordion-chevron">▼</span>
+          </button>
+          <div class="accordion-panel">
+            <p><strong>What happens:</strong> Your tenant violates HOA rules — noise complaints, unauthorized pets, parking violations. The HOA fines you (the owner) and may escalate to legal action, damaging your reputation in the building.</p>
+            <p><strong>How to protect yourself:</strong></p>
+            <ul>
+              <li>Include all HOA rules as an exhibit to your lease and make compliance an explicit lease obligation</li>
+              <li>Add a lease clause making HOA fines caused by tenant violations the tenant's financial responsibility</li>
+              <li>Screen for responsible tenants: homeowner history, professional references, and background checks</li>
+              <li>Conduct a 90-day check-in after move-in to catch issues before they escalate</li>
+              <li>Maintain a relationship with HOA management — be the landlord they can call to resolve issues promptly</li>
+              <li>Know your state's eviction timeline and begin the process immediately on serious violations</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn" aria-expanded="false">
+            <span class="accordion-icon">📊</span>
+            <span>HOA Fee Spiral — Cash Flow Erosion</span>
+            <span class="accordion-chevron">▼</span>
+          </button>
+          <div class="accordion-panel">
+            <p><strong>What happens:</strong> HOA fees rise 5–8% per year for several consecutive years due to rising insurance costs, deferred maintenance catch-up, or poor financial management. Your cash flow shrinks to zero or goes negative.</p>
+            <p><strong>How to protect yourself:</strong></p>
+            <ul>
+              <li>Underwrite your deal with HOA fees 15–20% higher than current to build in a buffer</li>
+              <li>Review the HOA's 5-year budget projection (most reserve studies include one) for planned increases</li>
+              <li>Check the building's insurance renewal history — post-Surfside, property insurance costs have surged in many markets</li>
+              <li>Raise rents annually (at or above lease-permitted increases) to keep pace with rising expenses</li>
+              <li>Monitor your cash-on-cash return annually; if it falls below 3%, model your exit and act before it goes negative</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn" aria-expanded="false">
+            <span class="accordion-icon">🏚️</span>
+            <span>Deferred Maintenance &amp; Building Neglect</span>
+            <span class="accordion-chevron">▼</span>
+          </button>
+          <div class="accordion-panel">
+            <p><strong>What happens:</strong> The building's physical condition deteriorates visibly — paint peeling, lobby neglected, elevators unreliable. Tenant quality declines, vacancy rises, and comparable sales soften.</p>
+            <p><strong>How to protect yourself:</strong></p>
+            <ul>
+              <li>Assess common area condition rigorously during your site visits — bring a contractor if possible</li>
+              <li>Review the HOA's maintenance logs and work order history (ask the management company)</li>
+              <li>Attend HOA meetings and advocate for proper maintenance if you own in the building</li>
+              <li>Check if the HOA management company has changed recently — transitions often signal governance dysfunction</li>
+              <li>If the building declines despite your advocacy, use the declining condition as a trigger to execute your exit strategy before the market fully prices in the deterioration</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Quality of Life Guide ===== -->
+  <section class="section section--dark" id="quality-of-life">
+    <div class="container">
+      <div class="section-label" style="color: var(--color-gold);">Livability Guide</div>
+      <h2 class="text-center">Preserving Quality of Life — For You &amp; Your Tenants</h2>
+      <p class="text-center" style="color:rgba(255,255,255,0.75); max-width:600px; margin:0.75rem auto 2.5rem;">
+        A great investment and a great place to live are not mutually exclusive. Here's how to
+        select and manage a condo that delivers on both dimensions.
+      </p>
+      <div class="qol-grid">
+        <div class="qol-card">
+          <div class="qol-card__icon">🔊</div>
+          <h4>Noise &amp; Privacy</h4>
+          <p>Visit the unit on a Friday and Saturday evening to test real-world noise. Concrete construction significantly outperforms wood-frame for sound insulation. Upper floors and corner units offer the most privacy. Ask current residents about their experience.</p>
+        </div>
+        <div class="qol-card">
+          <div class="qol-card__icon">☀️</div>
+          <h4>Light &amp; Air</h4>
+          <p>Natural light dramatically affects livability. Check the compass orientation of windows — south and east-facing units get the best light. Verify windows actually open for ventilation. High-rise HVAC systems that don't allow fresh air are a quality-of-life downgrade.</p>
+        </div>
+        <div class="qol-card">
+          <div class="qol-card__icon">🛗</div>
+          <h4>Building Operations</h4>
+          <p>Test the elevators at peak hour (7–9 am and 5–7 pm). A building with long elevator wait times or frequent breakdowns frustrates both owners and tenants. Check the maintenance response time with current residents.</p>
+        </div>
+        <div class="qol-card">
+          <div class="qol-card__icon">🐾</div>
+          <h4>Pet-Friendliness</h4>
+          <p>Pet restrictions can make your unit harder to rent — a large portion of renters have pets. Review breed and weight restrictions, pet deposits permitted by the HOA, designated relief areas, and overall pet culture in the building before buying.</p>
+        </div>
+        <div class="qol-card">
+          <div class="qol-card__icon">🏋️</div>
+          <h4>Amenity Quality</h4>
+          <p>Amenities are a selling point for tenants — but only if they're well-maintained. Visit the gym, pool, rooftop, and common areas on a regular weekday. Neglected amenities are a leading indicator of HOA governance problems.</p>
+        </div>
+        <div class="qol-card">
+          <div class="qol-card__icon">🔒</div>
+          <h4>Safety &amp; Security</h4>
+          <p>Check the building's entry control systems, lobby staffing (concierge vs. unattended), package security, camera coverage, and parking area lighting. Review the building's incident log with local police if available. Safety concerns drive tenant turnover.</p>
+        </div>
+        <div class="qol-card">
+          <div class="qol-card__icon">📦</div>
+          <h4>Package &amp; Delivery</h4>
+          <p>In the era of e-commerce, package theft and delivery logistics are a major tenant complaint. Does the building have a package room, smart lockers, or a staffed receiving area? This amenity is increasingly important to attract and retain tenants.</p>
+        </div>
+        <div class="qol-card">
+          <div class="qol-card__icon">🌳</div>
+          <h4>Neighborhood Walkability</h4>
+          <p>Use Walk Score, Bike Score, and Transit Score to quantify what's nearby. Proximity to grocery, restaurants, parks, and transit drives tenant satisfaction and reduces turnover. Target a Walk Score of 70+ for maximum rental demand.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Next Steps CTA ===== -->
+  <section class="section" id="next-steps">
+    <div class="container">
+      <h2 class="text-center">Continue Your Research</h2>
+      <p class="text-center text-muted" style="max-width:540px; margin:0 auto 3rem;">
+        Now that you've worked through the decision framework, deepen your knowledge with
+        these expert resources.
+      </p>
+      <div class="cta-cards">
+        <a href={`${base}/faq`} class="cta-card">
+          <div class="cta-card__icon">❓</div>
+          <h3>Investor FAQ</h3>
+          <p>Answers to the most common questions new condo investors ask — from financing to tenant management.</p>
+          <span class="cta-card__link">Read the FAQ →</span>
+        </a>
+        <a href={`${base}/articles/atlanta-market-crisis`} class="cta-card">
+          <div class="cta-card__icon">📰</div>
+          <h3>Atlanta Case Study</h3>
+          <p>A real-world case study on how a condo market becomes a financial trap — and what investors could have done differently.</p>
+          <span class="cta-card__link">Read the Case Study →</span>
+        </a>
+        <a href={`${base}/glossary`} class="cta-card">
+          <div class="cta-card__icon">📖</div>
+          <h3>Condo Glossary</h3>
+          <p>Every term you need to know — from warrantability and cap rate to special assessments and DSCR loans.</p>
+          <span class="cta-card__link">Browse the Glossary →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<!-- ===== Interactive JavaScript ===== -->
+<script>
+  /* ---------- Tab switching ---------- */
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.hero-tab');
+  const panels = document.querySelectorAll<HTMLElement>('.strategy-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tabs.forEach(t => { t.classList.remove('hero-tab--active'); t.setAttribute('aria-selected', 'false'); });
+      panels.forEach(p => p.classList.remove('strategy-panel--active'));
+      tab.classList.add('hero-tab--active');
+      tab.setAttribute('aria-selected', 'true');
+      const panel = document.getElementById(`tab-${target}`);
+      if (panel) panel.classList.add('strategy-panel--active');
+      panel?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+
+  /* ---------- Checklist scoring ---------- */
+  function setupChecklist(containerId: string, scoreId: string) {
+    const container = document.getElementById(containerId);
+    const scoreEl = document.getElementById(scoreId);
+    if (!container || !scoreEl) return;
+    const checkboxes = container.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+    const total = checkboxes.length;
+
+    function update() {
+      const checked = Array.from(checkboxes).filter(c => c.checked).length;
+      const pct = Math.round((checked / total) * 100);
+      let level = 'red';
+      let msg = 'Significant concerns — do not proceed without resolving all unchecked items.';
+      if (pct >= 88) { level = 'green'; msg = 'Strong buy signal — most critical criteria are met.'; }
+      else if (pct >= 63) { level = 'yellow'; msg = 'Proceed with caution — address unchecked items before committing.'; }
+      scoreEl.innerHTML = `
+        <div class="score-bar-wrap"><div class="score-bar score-bar--${level}" style="width:${pct}%"></div></div>
+        <p class="score-text score-text--${level}"><strong>${checked} / ${total} criteria met (${pct}%)</strong> — ${msg}</p>
+      `;
+      scoreEl.style.display = 'block';
+    }
+    checkboxes.forEach(cb => cb.addEventListener('change', update));
+  }
+
+  setupChecklist('checklist-hybrid', 'checklist-hybrid-score');
+  setupChecklist('checklist-owner', 'checklist-owner-score');
+  setupChecklist('checklist-landlord', 'checklist-landlord-score');
+  setupChecklist('checklist-investor', 'checklist-investor-score');
+
+  /* ---------- Financial Calculator ---------- */
+  document.getElementById('calcBtn')?.addEventListener('click', () => {
+    const val = (id: string) => parseFloat((document.getElementById(id) as HTMLInputElement)?.value || '0');
+
+    const price = val('purchasePrice');
+    const dpPct = val('downPayment') / 100;
+    const rate = val('interestRate') / 100 / 12;
+    const n = val('loanTerm') * 12;
+    const rent = val('monthlyRent');
+    const hoa = val('hoaFee');
+    const tax = val('propertyTax') / 12;
+    const ins = val('insurance') / 12;
+    const vacPct = val('vacancyRate') / 100;
+    const mgmtPct = val('mgmtFee') / 100;
+    const capexPct = val('capexRate') / 100;
+    const closingCostsPct = val('closingCostsPct') / 100;
+
+    const loanAmt = price * (1 - dpPct);
+    const downAmt = price * dpPct;
+    const closingCosts = price * closingCostsPct;
+    const totalCash = downAmt + closingCosts;
+
+    // Mortgage payment (P&I)
+    let mortgage = 0;
+    if (rate > 0 && n > 0) {
+      mortgage = loanAmt * (rate * Math.pow(1 + rate, n)) / (Math.pow(1 + rate, n) - 1);
+    }
+
+    // Income & expenses
+    const egi = rent * (1 - vacPct);
+    const mgmt = rent * mgmtPct;
+    const capex = rent * capexPct;
+    const totalExpenses = mortgage + hoa + tax + ins + mgmt + capex;
+    const cashFlow = egi - totalExpenses;
+
+    // Metrics
+    const annualNOI = (egi - (hoa + tax + ins + capex)) * 12;
+    const capRate = price > 0 ? (annualNOI / price) * 100 : 0;
+    const annualCashFlow = cashFlow * 12;
+    const coc = totalCash > 0 ? (annualCashFlow / totalCash) * 100 : 0;
+    const grm = rent > 0 ? price / (rent * 12) : 0;
+
+    const fmt = (n: number) => '$' + Math.round(n).toLocaleString();
+    const fmtPct = (n: number) => n.toFixed(2) + '%';
+
+    (document.getElementById('r-mortgage') as HTMLElement).textContent = fmt(mortgage);
+    (document.getElementById('r-egi') as HTMLElement).textContent = fmt(egi);
+    (document.getElementById('r-expenses') as HTMLElement).textContent = fmt(totalExpenses);
+    const cfEl = document.getElementById('r-cashflow') as HTMLElement;
+    cfEl.textContent = fmt(cashFlow) + '/mo';
+    cfEl.style.color = cashFlow >= 0 ? 'var(--color-success)' : '#e74c3c';
+    (document.getElementById('r-caprate') as HTMLElement).textContent = fmtPct(capRate);
+    const cocEl = document.getElementById('r-coc') as HTMLElement;
+    cocEl.textContent = fmtPct(coc);
+    cocEl.style.color = coc >= 6 ? 'var(--color-success)' : coc >= 3 ? 'var(--color-gold)' : '#e74c3c';
+    (document.getElementById('r-grm') as HTMLElement).textContent = grm.toFixed(1) + 'x';
+    (document.getElementById('r-totalcash') as HTMLElement).textContent = fmt(totalCash);
+
+    // Deal rating
+    let rating = 0;
+    let signals: string[] = [];
+    if (cashFlow > 0) { rating++; signals.push('✅ Positive cash flow'); } else { signals.push('❌ Negative cash flow'); }
+    if (capRate >= 5) { rating++; signals.push('✅ Cap rate ≥5%'); } else { signals.push('⚠️ Cap rate below 5%'); }
+    if (coc >= 6) { rating++; signals.push('✅ CoC return ≥6%'); } else { signals.push('⚠️ CoC return below 6%'); }
+    if (grm <= 16) { rating++; signals.push('✅ GRM ≤16'); } else { signals.push('⚠️ GRM above 16'); }
+
+    let ratingLabel = rating >= 4 ? '🟢 Strong Deal' : rating >= 3 ? '🟡 Marginal Deal' : rating >= 2 ? '🟠 Weak Deal' : '🔴 Deal Fails Investment Tests';
+    const ratingEl = document.getElementById('dealRating') as HTMLElement;
+    ratingEl.innerHTML = `
+      <h4 style="margin-bottom:0.75rem;">${ratingLabel}</h4>
+      <ul style="list-style:none;padding:0;font-size:0.9rem;display:flex;flex-direction:column;gap:0.35rem;">
+        ${signals.map(s => `<li>${s}</li>`).join('')}
+      </ul>
+    `;
+    ratingEl.className = `deal-rating deal-rating--${rating >= 4 ? 'green' : rating >= 3 ? 'yellow' : 'red'}`;
+    ratingEl.style.display = 'block';
+    (document.getElementById('resultCards') as HTMLElement).style.display = 'grid';
+  });
+
+  /* ---------- Accordion ---------- */
+  document.querySelectorAll<HTMLButtonElement>('.accordion-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.accordion-item') as HTMLElement;
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      // Close all
+      document.querySelectorAll<HTMLButtonElement>('.accordion-btn').forEach(b => {
+        b.setAttribute('aria-expanded', 'false');
+        b.closest('.accordion-item')?.classList.remove('accordion-item--open');
+      });
+      // Toggle clicked
+      if (!isOpen) {
+        btn.setAttribute('aria-expanded', 'true');
+        item.classList.add('accordion-item--open');
+      }
+    });
+  });
+</script>
+
+<style>
+  /* ===== Hero Tabs ===== */
+  .hero-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  .hero-tab {
+    padding: 0.6rem 1.25rem;
+    border-radius: 100px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.85);
+    transition: all 0.2s;
+  }
+
+  .hero-tab:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.6);
+    color: #fff;
+  }
+
+  .hero-tab--active {
+    background: var(--color-gold);
+    border-color: var(--color-gold);
+    color: var(--color-navy);
+  }
+
+  /* ===== Strategy Panels ===== */
+  .strategy-panel {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .strategy-panel--active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .strategy-header {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+
+  .strategy-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  /* ===== Two-Column Layout ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin: 2rem 0;
+  }
+
+  /* ===== Check List ===== */
+  .check-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .check-list li {
+    padding-left: 1.75rem;
+    position: relative;
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .check-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-success);
+    font-weight: 700;
+  }
+
+  /* ===== Checklist Grid ===== */
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin: 1.25rem 0;
+  }
+
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    background: var(--color-cream);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    line-height: 1.4;
+  }
+
+  .checklist-item:hover {
+    background: #eef3f8;
+    border-color: var(--color-gold);
+  }
+
+  .checklist-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    accent-color: var(--color-gold);
+    margin-top: 2px;
+  }
+
+  /* ===== Score Display ===== */
+  .score-display {
+    display: none;
+    margin-top: 1rem;
+  }
+
+  .score-bar-wrap {
+    background: var(--color-border);
+    border-radius: 100px;
+    height: 10px;
+    margin-bottom: 0.6rem;
+    overflow: hidden;
+  }
+
+  .score-bar {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 0.4s ease;
+  }
+
+  .score-bar--green  { background: var(--color-success); }
+  .score-bar--yellow { background: var(--color-gold); }
+  .score-bar--red    { background: #e74c3c; }
+
+  .score-text {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .score-text--green  { color: var(--color-success); }
+  .score-text--yellow { color: #a07c2d; }
+  .score-text--red    { color: #c0392b; }
+
+  /* ===== Calculator ===== */
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .calc-inputs {
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .calc-inputs h3 {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    color: var(--color-navy);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.6rem;
+  }
+
+  .calc-results {
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .calc-results h3 {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    color: var(--color-navy);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.6rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-text);
+    background: var(--color-cream);
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    background: var(--color-white);
+  }
+
+  .result-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .result-card {
+    background: var(--color-cream);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+  }
+
+  .result-card--highlight {
+    background: rgba(201,168,76,0.08);
+    border-color: rgba(201,168,76,0.35);
+  }
+
+  .result-card__label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  .result-card__value {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+
+  .deal-rating {
+    display: none;
+    border-radius: var(--radius-sm);
+    padding: 1.25rem 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .deal-rating--green  { background: rgba(39,174,96,0.1); border-left: 4px solid var(--color-success); }
+  .deal-rating--yellow { background: rgba(201,168,76,0.1); border-left: 4px solid var(--color-gold); }
+  .deal-rating--red    { background: rgba(231,76,60,0.08); border-left: 4px solid #e74c3c; }
+
+  /* ===== Due Diligence ===== */
+  .dd-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .dd-section {
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .dd-section__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .dd-section__num {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    line-height: 1;
+  }
+
+  .dd-section h3 {
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .dd-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 1.25rem;
+  }
+
+  .dd-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .dd-item p {
+    margin: 0.25rem 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.83rem;
+  }
+
+  .dd-item strong { display: block; color: var(--color-navy); }
+
+  .dd-item--critical { background: rgba(231,76,60,0.07); border-left: 3px solid #e74c3c; }
+  .dd-item--warning  { background: rgba(201,168,76,0.08); border-left: 3px solid var(--color-gold); }
+  .dd-item--good     { background: rgba(39,174,96,0.07); border-left: 3px solid var(--color-success); }
+
+  .dd-item__icon { font-size: 1.1rem; flex-shrink: 0; }
+
+  /* ===== Accordion ===== */
+  .accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .accordion-item {
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .accordion-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-navy);
+    transition: background 0.2s;
+  }
+
+  .accordion-btn:hover { background: var(--color-cream); }
+
+  .accordion-icon { font-size: 1.3rem; }
+
+  .accordion-chevron {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+
+  .accordion-item--open .accordion-chevron { transform: rotate(180deg); }
+
+  .accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.25s;
+    padding: 0 1.5rem;
+  }
+
+  .accordion-item--open .accordion-panel {
+    max-height: 1000px;
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  .accordion-panel p { font-size: 0.9rem; color: var(--color-text-muted); }
+  .accordion-panel ul { font-size: 0.9rem; color: var(--color-text-muted); }
+  .accordion-panel li { margin-bottom: 0.4rem; }
+
+  /* ===== Quality of Life Grid ===== */
+  .qol-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .qol-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-md);
+    padding: 1.75rem 1.5rem;
+    transition: background 0.25s;
+  }
+
+  .qol-card:hover { background: rgba(255,255,255,0.12); }
+
+  .qol-card__icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+
+  .qol-card h4 {
+    color: var(--color-gold-light);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .qol-card p {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.72);
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  /* ===== CTA cards (shared with index) ===== */
+  .cta-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .cta-card {
+    display: block;
+    background: var(--color-white);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  }
+
+  .cta-card:hover {
+    border-color: var(--color-gold);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    color: var(--color-text);
+  }
+
+  .cta-card__icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .cta-card h3 { margin-bottom: 0.75rem; }
+  .cta-card p { font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 1.25rem; }
+  .cta-card__link { font-size: 0.9rem; font-weight: 600; color: var(--color-gold); }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 900px) {
+    .dd-grid { grid-template-columns: 1fr; }
+    .calc-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .two-col { grid-template-columns: 1fr; gap: 1.5rem; }
+    .checklist-grid { grid-template-columns: 1fr; }
+    .result-cards { grid-template-columns: 1fr; }
+    .cta-cards { grid-template-columns: 1fr; }
+    .strategy-header { flex-direction: column; gap: 0.75rem; }
+  }
+</style>

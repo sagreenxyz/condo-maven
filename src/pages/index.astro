@@ -207,10 +207,16 @@ const base = import.meta.env.BASE_URL;
     <div class="container">
       <h2 class="text-center">Ready to Begin Your Journey?</h2>
       <p class="text-center text-muted" style="max-width: 540px; margin: 0 auto 3rem;">
-        Explore our structured roadmap to see where this resource is headed, or dive into the FAQ
-        to tackle the questions every new condo investor faces.
+        Start with our interactive decision support tool, explore the structured roadmap,
+        or dive into the FAQ to tackle the questions every new condo investor faces.
       </p>
       <div class="cta-cards">
+        <a href={`${base}/decision-support`} class="cta-card cta-card--featured">
+          <div class="cta-card__icon">🧭</div>
+          <h3>Decision Support Tool</h3>
+          <p>Interactive guidance for every buyer scenario — live there, rent it out, or sell for profit. Includes a deal analyzer calculator.</p>
+          <span class="cta-card__link">Start the Guide →</span>
+        </a>
         <a href={`${base}/roadmap`} class="cta-card">
           <div class="cta-card__icon">🗺️</div>
           <h3>Project Roadmap</h3>
@@ -489,7 +495,7 @@ const base = import.meta.env.BASE_URL;
   /* ===== CTA cards ===== */
   .cta-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     max-width: 960px;
     margin: 0 auto;
@@ -512,6 +518,17 @@ const base = import.meta.env.BASE_URL;
     transform: translateY(-4px);
     box-shadow: var(--shadow-md);
     color: var(--color-text);
+  }
+
+  .cta-card--featured {
+    border-color: var(--color-gold);
+    background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, var(--color-white) 100%);
+    grid-column: 1 / -1;
+  }
+
+  .cta-card--featured:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
   }
 
   .cta-card__icon {
@@ -550,6 +567,10 @@ const base = import.meta.env.BASE_URL;
 
     .cta-cards {
       grid-template-columns: 1fr;
+    }
+
+    .cta-card--featured {
+      grid-column: auto;
     }
 
     .hero {
