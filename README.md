@@ -69,7 +69,9 @@ condo-maven/
 |------|--------|---------|
 | Home | `/` | Explains the site concept, scope, and value proposition |
 | Roadmap | `/roadmap` | 6-phase development plan with tasks and feature ideas |
-| FAQ | `/faq` | Categorized Q&A for first-time condo investors |
+| FAQ | `/faq` | Categorized Q&A for first-time condo investors (7 categories, 28 questions) |
+| Glossary | `/glossary` | Comprehensive glossary of 30+ condo & real estate investing terms |
+| Atlanta Crisis | `/articles/atlanta-market-crisis` | Case study: Atlanta condo market crisis (financing walls, HOA fee spiral, rental cap traps) |
 
 ---
 
@@ -89,7 +91,9 @@ The site uses a custom CSS design system (no external UI framework) with:
 ### Sprint 1 — Foundation ✅
 - Home page with concept, scope, and CTA sections
 - Roadmap page with 6 development phases
-- FAQ page with 23 starter questions across 6 categories
+- FAQ page with 28 Q&A entries across 7 categories (added: Market Risks & Red Flags)
+- Glossary page with 30+ term definitions
+- Case study article: Atlanta Condo Market Crisis (post-Surfside financing crisis, HOA fee spiral, rental cap traps, special assessment risk, 7-point due diligence checklist)
 - Global CSS design system
 - Sticky navigation and footer
 
