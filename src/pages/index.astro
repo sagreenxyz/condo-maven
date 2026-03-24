@@ -127,6 +127,11 @@ const base = import.meta.env.BASE_URL;
           <h3>Exit Strategies</h3>
           <p class="text-muted">Timing your sale, 1031 exchanges, converting rentals to short-term rentals, owner-occupancy, and legacy planning.</p>
         </div>
+        <div class="card">
+          <div class="card__icon">⚠️</div>
+          <h3>Market Risks &amp; Red Flags</h3>
+          <p class="text-muted">Financing walls, warrantability crises, HOA fee spirals, rental cap traps, and special assessment gut punches — what every investor must know before buying.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -165,6 +170,38 @@ const base = import.meta.env.BASE_URL;
     </div>
   </section>
 
+  <!-- ===== Featured Article Section ===== -->
+  <section class="section" id="featured">
+    <div class="container">
+      <div class="section-label">Case Study</div>
+      <h2 class="text-center">Know the Risks Before You Buy</h2>
+      <p class="text-center text-muted" style="max-width: 600px; margin: 0.75rem auto 2.5rem;">
+        Not every condo market is a success story. Understanding what can go wrong — and why —
+        is just as important as knowing the upside.
+      </p>
+      <div class="featured-article">
+        <div class="featured-article__badge">
+          <span class="badge badge-gold">Featured Case Study</span>
+          <span class="featured-article__topic">Atlanta, GA · Market Risks</span>
+        </div>
+        <h3 class="featured-article__title">Can't Sell, Can't Rent, Can't Leave: Why Urban Condo Markets Can Become Financial Traps</h3>
+        <p class="featured-article__desc">
+          A deep-dive into the Atlanta condominium market crisis — covering the post-Surfside financing
+          wall, the HOA fee spiral, the rental cap trap, and the special assessment gut punch. Includes
+          a 7-point due diligence checklist every investor must complete before closing.
+        </p>
+        <div class="featured-article__topics">
+          <span class="topic-tag">Warrantability</span>
+          <span class="topic-tag">Special Assessments</span>
+          <span class="topic-tag">Rental Caps</span>
+          <span class="topic-tag">HOA Fee Spiral</span>
+          <span class="topic-tag">Due Diligence</span>
+        </div>
+        <a href="/articles/atlanta-market-crisis" class="btn btn-primary">Read the Case Study →</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== CTA / Navigation Section ===== -->
   <section class="section" id="explore">
     <div class="container">
@@ -185,6 +222,12 @@ const base = import.meta.env.BASE_URL;
           <h3>Investor FAQ</h3>
           <p>Get answers to the most common questions new condo investors ask before getting started.</p>
           <span class="cta-card__link">Read the FAQ →</span>
+        </a>
+        <a href="/glossary" class="cta-card">
+          <div class="cta-card__icon">📖</div>
+          <h3>Condo Glossary</h3>
+          <p>Every term you need to know — from warrantability and cap rate to special assessments and DSCR loans.</p>
+          <span class="cta-card__link">Browse the Glossary →</span>
         </a>
       </div>
     </div>
@@ -382,12 +425,73 @@ const base = import.meta.env.BASE_URL;
     margin: 0;
   }
 
+  /* ===== Featured Article ===== */
+  .featured-article {
+    background: var(--color-white);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    max-width: 820px;
+    margin: 0 auto;
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+
+  .featured-article:hover {
+    border-color: var(--color-gold);
+    box-shadow: var(--shadow-md);
+  }
+
+  .featured-article__badge {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .featured-article__topic {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .featured-article__title {
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    margin-bottom: 1rem;
+    color: var(--color-navy);
+  }
+
+  .featured-article__desc {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+  }
+
+  .featured-article__topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .topic-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-navy);
+  }
+
   /* ===== CTA cards ===== */
   .cta-cards {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    max-width: 800px;
+    max-width: 960px;
     margin: 0 auto;
   }
 
@@ -432,6 +536,12 @@ const base = import.meta.env.BASE_URL;
   }
 
   /* ===== Responsive ===== */
+  @media (max-width: 960px) {
+    .cta-cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
   @media (max-width: 768px) {
     .about__grid {
       grid-template-columns: 1fr;
