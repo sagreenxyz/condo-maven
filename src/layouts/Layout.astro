@@ -34,6 +34,7 @@ const currentPath = Astro.url.pathname;
           <li><a href="/" class:list={['nav__link', { 'nav__link--active': currentPath === '/' }]}>Home</a></li>
           <li><a href="/roadmap" class:list={['nav__link', { 'nav__link--active': currentPath === '/roadmap' || currentPath === '/roadmap/' }]}>Roadmap</a></li>
           <li><a href="/faq" class:list={['nav__link', { 'nav__link--active': currentPath === '/faq' || currentPath === '/faq/' }]}>FAQ</a></li>
+          <li><a href="/glossary" class:list={['nav__link', { 'nav__link--active': currentPath === '/glossary' || currentPath === '/glossary/' }]}>Glossary</a></li>
         </ul>
       </div>
     </nav>
@@ -57,6 +58,7 @@ const currentPath = Astro.url.pathname;
               <li><a href="/">Home</a></li>
               <li><a href="/roadmap">Roadmap</a></li>
               <li><a href="/faq">FAQ</a></li>
+              <li><a href="/glossary">Glossary</a></li>
             </ul>
           </div>
           <div class="footer__links">
@@ -65,7 +67,8 @@ const currentPath = Astro.url.pathname;
               <li><a href="/faq#financing">Financing</a></li>
               <li><a href="/faq#management">Management</a></li>
               <li><a href="/faq#due-diligence">Due Diligence</a></li>
-              <li><a href="/roadmap#phase-2">Legal &amp; Tax</a></li>
+              <li><a href="/faq#market-risks">Market Risks</a></li>
+              <li><a href="/articles/atlanta-market-crisis">Atlanta Case Study</a></li>
             </ul>
           </div>
         </div>

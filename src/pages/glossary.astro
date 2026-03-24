@@ -1,0 +1,473 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const terms = [
+  {
+    letter: 'A',
+    entries: [
+      {
+        term: 'Amortization',
+        definition: 'The process of gradually paying off a loan through scheduled installment payments. Each payment covers both principal and interest, with the interest portion decreasing over time as the loan balance shrinks. A 30-year amortizing mortgage on a condo will have mostly-interest payments early on and mostly-principal payments near the end.',
+      },
+      {
+        term: 'Appreciation',
+        definition: 'The increase in a property\'s market value over time. Appreciation can be driven by inflation, local demand, neighborhood improvements, or upgrades to the unit. For condo investors, appreciation is often secondary to cash flow as a wealth-building mechanism, but strong markets can deliver both.',
+      },
+    ],
+  },
+  {
+    letter: 'B',
+    entries: [
+      {
+        term: 'BRRRR Strategy',
+        definition: 'Buy, Rehab, Rent, Refinance, Repeat — a real estate investing framework adapted by condo investors to recycle capital. The investor buys a discounted condo needing cosmetic work, rehabilitates it to increase value, rents it to a qualified tenant, then refinances to pull out equity and fund the next purchase. Works best in markets with value-add inventory and favorable refi rates.',
+      },
+      {
+        term: 'Bylaws',
+        definition: 'The operational rules of a condominium association, distinct from the Declaration (CC&Rs). Bylaws govern how the HOA itself is run — board elections, meeting procedures, voting thresholds, officer duties, and amendment processes. Always review both the Declaration and Bylaws during due diligence.',
+      },
+    ],
+  },
+  {
+    letter: 'C',
+    entries: [
+      {
+        term: 'Cap Rate (Capitalization Rate)',
+        definition: 'A property valuation metric calculated as Net Operating Income (NOI) ÷ Property Value, expressed as a percentage. A condo generating $12,000 NOI and worth $200,000 has a 6% cap rate. Cap rate allows investors to compare yield across properties independently of financing. Higher cap rates suggest higher return potential but may also reflect higher risk or lower market desirability.',
+      },
+      {
+        term: 'Capital Expenditure (CapEx)',
+        definition: 'Major one-time or infrequent expenditures to repair or replace significant components of a unit — such as HVAC, water heater, flooring, kitchen appliances, or windows. Investors should budget 5–10% of annual gross rent for in-unit CapEx, in addition to HOA reserve contributions for building-wide capital projects.',
+      },
+      {
+        term: 'Cash-on-Cash Return',
+        definition: 'Annual pre-tax cash flow divided by total cash invested, expressed as a percentage. If you invested $50,000 (down payment + closing costs + initial repairs) and the property produces $4,000 per year in cash flow after all expenses and debt service, your cash-on-cash return is 8%. It is the most practical yield metric for leveraged real estate investments.',
+      },
+      {
+        term: 'Cash Flow',
+        definition: 'The net income remaining after all property-related expenses are paid — including mortgage principal and interest, HOA fees, property taxes, insurance, property management, maintenance, vacancy reserve, and CapEx reserve. Positive cash flow means the investment pays you each month; negative cash flow means you\'re subsidizing it.',
+      },
+      {
+        term: 'CC&Rs (Covenants, Conditions & Restrictions)',
+        definition: 'The governing document of a condominium association — also called the "Declaration" — that defines the rights and obligations of each unit owner. CC&Rs cover ownership boundaries, permitted uses, rental restrictions, pet policies, renovation rules, and how the common elements are managed. This is the most critical document to review before buying.',
+      },
+      {
+        term: 'Common Elements',
+        definition: 'The portions of a condominium development that all unit owners share — including hallways, lobbies, elevators, roofs, exterior walls, pools, gyms, parking structures, and landscaping. Common elements are maintained by the HOA and funded through monthly fees and the reserve fund. Understanding what is "common" versus "unit-owned" is essential for expense planning.',
+      },
+      {
+        term: 'Condo Declaration',
+        definition: 'See CC&Rs. The Condo Declaration is the foundational legal document that establishes the condominium as a legal entity, describes each unit\'s boundaries, defines common areas, and sets forth the rules of ownership. It is recorded with the county and governs all owners and their successors.',
+      },
+      {
+        term: 'Condominium (Condo)',
+        definition: 'A form of real estate ownership where an individual owns the interior of a specific unit (from the "paint inward" in most jurisdictions) and shares ownership of common areas with other unit owners through a Homeowners Association. Condos differ from apartments (renter-occupied), co-ops (share-based ownership), and single-family homes (sole land ownership).',
+      },
+    ],
+  },
+  {
+    letter: 'D',
+    entries: [
+      {
+        term: 'Debt Service Coverage Ratio (DSCR)',
+        definition: 'A loan qualification metric used by non-QM lenders: DSCR = Gross Rental Income ÷ Total Debt Service (PITI + HOA). A DSCR of 1.0 means rent exactly covers the mortgage payment; 1.25 means rent covers 125% of debt service. DSCR loans qualify you on property income rather than personal income — useful for self-employed investors or those with multiple financed properties.',
+      },
+      {
+        term: 'Debt-to-Income Ratio (DTI)',
+        definition: 'A lender\'s measure of borrower risk: total monthly debt obligations ÷ gross monthly income. Most conventional lenders cap DTI at 43–45% for investment properties. Your existing mortgage payments, car loans, student loans, credit card minimums, and the proposed new mortgage all count. Keeping DTI in check is essential for scaling a condo portfolio through conventional financing.',
+      },
+      {
+        term: 'Delinquency Rate',
+        definition: 'The percentage of unit owners in a condominium who are behind on HOA dues payments. A high delinquency rate (above 10–15%) is a serious red flag: it forces the HOA to raise fees on paying owners to cover the shortfall, reduces the building\'s warrantability (Fannie Mae monitors delinquency levels), and signals overall financial stress in the community. Always request the current delinquency rate during due diligence — it is a leading indicator of the HOA\'s fiscal health.',
+      },
+      {
+        term: 'Depreciation',
+        definition: 'A non-cash tax deduction that allows investors to deduct a portion of the property\'s value each year as an expense, reducing taxable income. Residential investment property is depreciated over 27.5 years under U.S. tax law. Only the building value (not land) is depreciated. On a $200,000 condo with $30,000 in land value, you can deduct roughly $6,182/year ($170,000 ÷ 27.5). This "paper loss" often shelters real rental income from taxation.',
+      },
+      {
+        term: 'Down Payment',
+        definition: 'The upfront cash contribution you make toward a property purchase, expressed as a percentage of the purchase price. Investment condos typically require 15–25% down for conventional financing, compared to 3–5% for a primary residence. A larger down payment reduces the loan balance and monthly payment but also lowers your cash-on-cash return by increasing invested capital.',
+      },
+      {
+        term: 'Due Diligence',
+        definition: 'The comprehensive investigation of a property and its associated HOA before finalizing a purchase. For condos, due diligence includes reviewing the Condo Declaration, Bylaws, HOA financials (budget, reserve fund study, meeting minutes), insurance certificate, pending litigation, and special assessment history. The due diligence period (typically 7–21 days after contract) is your window to walk away if problems emerge.',
+      },
+    ],
+  },
+  {
+    letter: 'E',
+    entries: [
+      {
+        term: 'Equity',
+        definition: 'The portion of a property\'s value that you own outright — calculated as Market Value minus Outstanding Loan Balance. Equity builds through three channels: appreciation (rising market value), mortgage paydown (principal reduction each month), and forced appreciation (renovations that increase value). Equity can be accessed via cash-out refinance or HELOC to fund additional investments.',
+      },
+    ],
+  },
+  {
+    letter: 'F',
+    entries: [
+      {
+        term: 'Fannie Mae / Freddie Mac',
+        definition: 'Government-Sponsored Enterprises (GSEs) that purchase conforming mortgages from lenders, creating liquidity in the mortgage market. For condos, Fannie Mae and Freddie Mac publish project approval guidelines (warrantability criteria) that lenders must satisfy to sell loans on the secondary market. Non-warrantable condos cannot be sold to the GSEs, limiting financing options to portfolio lenders.',
+      },
+      {
+        term: 'FHA Loan',
+        definition: 'A federally insured mortgage designed for primary residence buyers with lower credit scores or smaller down payments (as low as 3.5%). FHA loans are not available for investment condos — only for owner-occupied units. However, a strategy called "house hacking" allows you to buy a condo with an FHA loan, live in it briefly, then convert it to a rental after the occupancy period.',
+      },
+    ],
+  },
+  {
+    letter: 'G',
+    entries: [
+      {
+        term: 'Gross Rental Income',
+        definition: 'The total rental income a property would generate if 100% occupied at market rate for an entire year. Gross Rental Income is the starting point for underwriting, before subtracting vacancy, expenses, and debt service to arrive at Cash Flow.',
+      },
+    ],
+  },
+  {
+    letter: 'H',
+    entries: [
+      {
+        term: 'HELOC (Home Equity Line of Credit)',
+        definition: 'A revolving line of credit secured by equity in a property, similar to a credit card backed by real estate. HELOCs allow investors to draw funds, repay, and draw again during the draw period (typically 10 years). They are commonly used to fund down payments or CapEx for subsequent condo purchases without selling the original asset.',
+      },
+      {
+        term: 'HOA (Homeowners Association)',
+        definition: 'The governing body for a condominium development, comprised of unit owners. The HOA is responsible for maintaining common areas, enforcing CC&Rs, collecting monthly dues, maintaining the reserve fund, procuring building insurance, and managing vendor relationships. HOA quality — including financial health, management professionalism, and governance culture — is one of the most important variables in a condo investment.',
+      },
+      {
+        term: 'HOA Dues / HOA Fees',
+        definition: 'Monthly (or sometimes quarterly/annual) assessments paid by each unit owner to fund the HOA\'s operating budget and reserve contributions. Fees vary enormously — from under $100/month in a small, low-amenity community to over $1,500/month in a luxury high-rise. HOA dues are a direct operating expense for investors and must be factored into cash flow projections.',
+      },
+    ],
+  },
+  {
+    letter: 'I',
+    entries: [
+      {
+        term: 'Investor Concentration',
+        definition: 'The percentage of units in a condo building that are investor-owned rather than owner-occupied. Fannie Mae and Freddie Mac have concentration limits — if more than a certain percentage of units are investor-owned (often 35–50%, depending on the program), the project may become non-warrantable, restricting conventional financing for all units in the building.',
+      },
+    ],
+  },
+  {
+    letter: 'L',
+    entries: [
+      {
+        term: 'Leverage',
+        definition: 'The use of borrowed capital (mortgage) to amplify the return on your invested cash. Leverage allows you to control a $200,000 asset with only $40,000 down (20% down), magnifying both gains and losses. Responsible leverage management — maintaining positive cash flow and adequate reserves — is the key discipline of portfolio investing.',
+      },
+      {
+        term: 'Like-Kind Property',
+        definition: 'A term used in 1031 exchange transactions referring to replacement property that is similar in nature to the relinquished property. For real estate, "like-kind" is broadly interpreted — virtually any investment real property qualifies, so a condo can be exchanged for a multi-family building, commercial property, or another condo without triggering capital gains tax, as long as other 1031 rules are met.',
+      },
+      {
+        term: 'Loan-to-Value Ratio (LTV)',
+        definition: 'The loan amount divided by the property\'s appraised value, expressed as a percentage. An 80% LTV means you borrowed $160,000 on a $200,000 condo ($40,000 down). Lower LTV typically means better loan terms and interest rates. LTV is also the inverse of equity — 80% LTV means 20% equity.',
+      },
+    ],
+  },
+  {
+    letter: 'M',
+    entries: [
+      {
+        term: 'Master Insurance Policy',
+        definition: 'The HOA\'s building-wide insurance policy that covers the structure (exterior walls, roof, common areas) and often common-element fixtures. There are two main types: "bare walls" (covers only the structure, not unit interiors) and "all-in" (covers original fixtures and finishes inside units). Understanding your HOA\'s master policy determines how much supplemental "walls-in" or HO-6 insurance you need as an individual unit owner.',
+      },
+    ],
+  },
+  {
+    letter: 'N',
+    entries: [
+      {
+        term: 'Net Operating Income (NOI)',
+        definition: 'Gross Rental Income minus all operating expenses (vacancy, property management, maintenance, insurance, HOA dues, property taxes, CapEx reserve) — before mortgage debt service. NOI is used to calculate Cap Rate and is the primary measure of a property\'s income-generating ability independent of financing structure.',
+      },
+      {
+        term: 'Non-Warrantable Condo',
+        definition: 'A condominium project that fails to meet Fannie Mae or Freddie Mac eligibility guidelines, disqualifying it from conventional financing. Common reasons include high investor concentration, a single entity owning more than 10% of units, an HOA involved in active litigation, insufficient insurance coverage, or new construction with less than 51% of units sold. Non-warrantable condos typically require portfolio loans at higher rates.',
+      },
+    ],
+  },
+  {
+    letter: 'P',
+    entries: [
+      {
+        term: 'Passive Activity Rules',
+        definition: 'IRS rules (under Section 469) that limit how rental losses can offset other income. Rental income and losses are generally "passive" — meaning losses can only offset other passive income, not earned income (salaries, wages). However, investors who qualify as "real estate professionals" (750+ hours/year in real estate) may deduct unlimited rental losses against ordinary income.',
+      },
+      {
+        term: 'PITI',
+        definition: 'Principal, Interest, Taxes, and Insurance — the four components of a typical monthly mortgage payment. Lenders use PITI (plus HOA dues for condos) to calculate your housing expense ratio and verify you can service the debt. For investment properties, PITI is a key component of your monthly expense load in cash flow projections.',
+      },
+      {
+        term: 'Portfolio Loan',
+        definition: 'A mortgage originated and held by the lender rather than sold to Fannie Mae or Freddie Mac. Portfolio lenders set their own underwriting guidelines, making them more flexible for non-warrantable condos, borrowers with unusual income profiles, or investors exceeding conforming loan limits. The trade-off is typically higher interest rates (0.5–2% above conventional) and sometimes shorter loan terms.',
+      },
+      {
+        term: 'Property Management Company',
+        definition: 'A professional company hired by landlords to manage day-to-day rental operations — tenant screening, rent collection, maintenance coordination, lease enforcement, move-in/move-out inspections, and legal compliance. Property managers typically charge 8–12% of gross monthly rent plus leasing fees (often 50–100% of one month\'s rent). For condo investors managing units remotely or growing to multiple units, professional management often becomes cost-effective.',
+      },
+    ],
+  },
+  {
+    letter: 'Q',
+    entries: [
+      {
+        term: 'Qualified Intermediary (QI)',
+        definition: 'A neutral third-party who facilitates a 1031 exchange by holding the sale proceeds between the time you close on the relinquished property and close on the replacement property. Using a QI is required by IRS rules — if you personally receive the sale proceeds, even briefly, the exchange is disqualified and capital gains become immediately taxable.',
+      },
+    ],
+  },
+  {
+    letter: 'R',
+    entries: [
+      {
+        term: 'Rental Cap',
+        definition: 'A provision in a condo building\'s CC&Rs or rules that limits the total percentage of units that can be leased to tenants at any one time — commonly set at 20–30% of all units. Rental caps protect warrantability (Fannie Mae and Freddie Mac limit investor concentration) but can trap owners who need to rent their unit. Leasing permits are often held by long-term investors, leaving newer owners on multi-year waitlists. Always verify the rental cap status and waitlist length before purchasing.',
+      },
+      {
+        term: 'Reserve Fund',
+        definition: 'Money set aside by the HOA to fund future major repairs and capital replacements — such as roof replacement, elevator upgrades, pool resurfacing, or parking structure repairs. A healthy reserve fund (generally 70%+ funded per the reserve study) is a critical indicator of HOA financial health. An underfunded reserve is the primary driver of surprise special assessments.',
+      },
+      {
+        term: 'Reserve Study',
+        definition: 'A professional report commissioned by the HOA to assess the condition, remaining useful life, and replacement cost of all major common elements, then calculate how much the HOA needs to contribute each year to fully fund future replacements. The "percent funded" metric from the reserve study tells you whether the HOA is on track. Review the most recent reserve study during your due diligence period.',
+      },
+      {
+        term: 'Resale Certificate',
+        definition: 'A disclosure document provided by the HOA (or its management company) when a condo unit is sold. The resale certificate typically includes current HOA dues, pending special assessments, reserve fund balance, litigation status, rental restrictions, and the HOA\'s most recent financial statements. Many states legally require this disclosure before closing.',
+      },
+    ],
+  },
+  {
+    letter: 'S',
+    entries: [
+      {
+        term: 'Security Deposit',
+        definition: 'A refundable amount collected from a tenant at lease inception, held to cover unpaid rent or unit damage beyond normal wear and tear. Most states cap security deposits at 1–2 months\' rent and regulate timelines for returning deposits. Investors should always charge the legal maximum allowed in their state.',
+      },
+      {
+        term: 'Special Assessment',
+        definition: 'A one-time charge levied by the HOA on all unit owners to cover costs not covered by regular fees — typically for major unexpected repairs, reserve fund shortfalls, or emergency expenses. Special assessments can range from a few hundred dollars (minor repairs) to tens of thousands (structural repairs, elevator replacement). They represent one of the most significant financial risks of condo investing and can be avoided by choosing buildings with healthy, well-funded reserves.',
+      },
+    ],
+  },
+  {
+    letter: 'T',
+    entries: [
+      {
+        term: 'Tenant Screening',
+        definition: 'The process of evaluating rental applicants before signing a lease. Best practice includes a credit check (aim for 650+), income verification (3x monthly rent in gross income), rental history verification (reference calls to prior landlords), and a background check. Thorough tenant screening is the single most impactful action a landlord takes to prevent future problems.',
+      },
+      {
+        term: '1031 Exchange',
+        definition: 'A tax deferral mechanism under IRS Section 1031 that allows an investor to sell one investment property and reinvest the proceeds into a "like-kind" replacement property, deferring capital gains tax indefinitely. Key rules: the replacement property must be identified within 45 days of the sale closing and the exchange must be completed within 180 days. A Qualified Intermediary must hold the funds throughout the process.',
+      },
+    ],
+  },
+  {
+    letter: 'V',
+    entries: [
+      {
+        term: 'Vacancy Rate',
+        definition: 'The percentage of time a rental unit is unoccupied during a year. A 5% vacancy rate means the unit sits empty roughly 18 days per year. Smart underwriting assumes a 5–8% vacancy rate even if you expect the unit to be rented continuously. Vacancy is one of the most underestimated expenses for new landlords — always budget for it.',
+      },
+    ],
+  },
+  {
+    letter: 'W',
+    entries: [
+      {
+        term: 'Warrantable Condo',
+        definition: 'A condominium project that meets Fannie Mae and Freddie Mac guidelines, making individual units eligible for conventional financing at standard rates. Warrantability criteria include: fewer than 35–50% investor-owned units (depending on program), no single entity owning more than 10% of units, the HOA is financially solvent without pending litigation, and the building has adequate insurance. Always verify warrantability status with your lender before making an offer.',
+      },
+    ],
+  },
+];
+---
+
+<Layout
+  title="Glossary"
+  description="A comprehensive glossary of condominium investing terms — from HOA, CC&Rs, and warrantability to cap rate, DSCR, and 1031 exchanges."
+>
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <span class="badge badge-gold">Reference Guide</span>
+      <h1>Condo Investing Glossary</h1>
+      <p>
+        Every term you need to know — defined clearly for first-time and experienced
+        condo investors alike. Bookmark this page and return often as you deepen your knowledge.
+      </p>
+    </div>
+  </div>
+
+  <!-- Alphabet Nav -->
+  <div class="alpha-nav">
+    <div class="container">
+      <div class="alpha-nav__inner">
+        {terms.map(group => (
+          <a href={`#letter-${group.letter}`} class="alpha-nav__link">{group.letter}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Glossary Content -->
+  <section class="section">
+    <div class="container glossary-container">
+      {terms.map((group) => (
+        <div class="letter-group" id={`letter-${group.letter}`}>
+          <div class="letter-group__header">
+            <span class="letter-group__char">{group.letter}</span>
+            <div class="letter-group__line" aria-hidden="true"></div>
+          </div>
+          <div class="term-list">
+            {group.entries.map((entry) => (
+              <div class="term-card" id={entry.term.toLowerCase().replace(/[^a-z0-9]/g, '-')}>
+                <h3 class="term-card__term">{entry.term}</h3>
+                <p class="term-card__def">{entry.definition}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--alt">
+    <div class="container text-center">
+      <h2>Ready to Put These Terms to Work?</h2>
+      <p class="text-muted" style="max-width: 520px; margin: 0 auto 1.5rem;">
+        Understanding the vocabulary is the first step. Explore the FAQ for practical answers to
+        common investor questions, or check the roadmap to see what's coming next on CondoMaven.
+      </p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="/faq" class="btn btn-primary">Explore the FAQ →</a>
+        <a href="/roadmap" class="btn" style="border:2px solid var(--color-border); color:var(--color-navy);">View Roadmap</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ===== Alphabet Nav ===== */
+  .alpha-nav {
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 68px;
+    z-index: 90;
+  }
+
+  .alpha-nav__inner {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.65rem 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-wrap: wrap;
+  }
+
+  .alpha-nav__inner::-webkit-scrollbar { display: none; }
+
+  .alpha-nav__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .alpha-nav__link:hover {
+    background: rgba(201,168,76,0.12);
+    color: var(--color-navy);
+  }
+
+  /* ===== Glossary layout ===== */
+  .glossary-container {
+    max-width: 820px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  /* ===== Letter group ===== */
+  .letter-group__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .letter-group__char {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .letter-group__line {
+    flex: 1;
+    height: 2px;
+    background: var(--color-border);
+    border-radius: 2px;
+  }
+
+  /* ===== Term cards ===== */
+  .term-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .term-card {
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    padding: 1.5rem 1.75rem;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .term-card:hover {
+    box-shadow: var(--shadow-sm);
+    border-color: rgba(201,168,76,0.4);
+  }
+
+  .term-card__term {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    color: var(--color-navy);
+    margin-bottom: 0.6rem;
+  }
+
+  .term-card__def {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 640px) {
+    .letter-group__char {
+      font-size: 1.75rem;
+    }
+
+    .term-card {
+      padding: 1.25rem 1.25rem;
+    }
+  }
+</style>
