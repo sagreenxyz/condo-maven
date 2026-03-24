@@ -1,0 +1,406 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const phases = [
+  {
+    id: 'phase-1',
+    number: '01',
+    title: 'Foundation & Discovery',
+    status: 'in-progress',
+    badge: 'In Progress',
+    description: 'Establish the core informational structure of CondoMaven and cover the absolute basics that every new condo investor needs to know before taking action.',
+    items: [
+      { done: true,  text: 'Launch home page with site concept and scope overview' },
+      { done: true,  text: 'Create Project Roadmap page' },
+      { done: true,  text: 'Create FAQ page with starter investor questions' },
+      { done: false, text: 'Write "Introduction to Condo Investing" guide article' },
+      { done: false, text: 'Publish "How to Read a Condo Declaration" primer' },
+      { done: false, text: 'Add glossary of key condo & real estate terms' },
+      { done: false, text: 'Set up newsletter/email capture for updates' },
+    ],
+    ideas: [
+      'Interactive quiz: "Is Condo Investing Right for You?"',
+      'Downloadable one-page condo investment checklist (PDF)',
+      'Embed a mortgage payment estimator widget',
+    ],
+  },
+  {
+    id: 'phase-2',
+    number: '02',
+    title: 'Market Research & Acquisition',
+    status: 'planned',
+    badge: 'Planned',
+    description: 'Deep-dive content on finding the right market, analyzing deals, and successfully acquiring your first condominium unit.',
+    items: [
+      { done: false, text: 'Guide: How to evaluate a condo market (macro & micro)' },
+      { done: false, text: 'Article: Financing options for investment condos (conventional vs. portfolio loans)' },
+      { done: false, text: 'Walkthrough: What to look for in an HOA financial statement' },
+      { done: false, text: 'Guide: Making an offer & navigating the purchase contract' },
+      { done: false, text: 'Tool: Cash-on-Cash Return calculator' },
+      { done: false, text: 'Tool: Cap Rate & NOI calculator' },
+      { done: false, text: 'Article: Working with a buyer\'s agent who specializes in investment condos' },
+    ],
+    ideas: [
+      'Interactive market comparison tool (city A vs. city B)',
+      'Deal analyzer spreadsheet template (Google Sheets / Excel)',
+      'Video walkthroughs of sample HOA financials',
+    ],
+  },
+  {
+    id: 'phase-3',
+    number: '03',
+    title: 'Ownership & Tenant Management',
+    status: 'planned',
+    badge: 'Planned',
+    description: 'Everything you need to know about running your condo as a rental business — from move-in to lease renewal and everything in between.',
+    items: [
+      { done: false, text: 'Guide: Setting the right rental price for your condo' },
+      { done: false, text: 'Article: Tenant screening best practices & legal considerations' },
+      { done: false, text: 'Template: Condo lease addendum (HOA rules & regulations)' },
+      { done: false, text: 'Article: Navigating rental restrictions & HOA approval processes' },
+      { done: false, text: 'Guide: Managing maintenance requests & vendor relationships' },
+      { done: false, text: 'Article: Security deposits, move-in/move-out inspections' },
+      { done: false, text: 'Guide: Property management companies — when to hire one' },
+    ],
+    ideas: [
+      'Tenant screening checklist download',
+      'Sample lease addendum template (editable)',
+      'Podcast episode: "A day in the life of a condo landlord"',
+    ],
+  },
+  {
+    id: 'phase-4',
+    number: '04',
+    title: 'Financial Optimization & Tax',
+    status: 'planned',
+    badge: 'Planned',
+    description: 'Maximize the financial returns from your condo portfolio through smart accounting, tax strategy, and expense management.',
+    items: [
+      { done: false, text: 'Guide: Tracking income & expenses for a rental condo' },
+      { done: false, text: 'Article: Depreciation — the investor\'s best friend explained simply' },
+      { done: false, text: 'Article: Passive activity rules and how they affect condo landlords' },
+      { done: false, text: 'Guide: When to form an LLC or other entity for condo investing' },
+      { done: false, text: 'Article: HOA fees — what\'s deductible and what\'s not' },
+      { done: false, text: 'Interview: CPA Q&A on condo investor tax strategies' },
+    ],
+    ideas: [
+      'Annual rental income/expense tracker (spreadsheet)',
+      'Tax year-end checklist for condo investors',
+      'Webinar: "Tax Strategy for Condo Investors" with a CPA guest',
+    ],
+  },
+  {
+    id: 'phase-5',
+    number: '05',
+    title: 'Portfolio Scaling & Exit',
+    status: 'planned',
+    badge: 'Planned',
+    description: 'Strategies and frameworks for growing beyond your first unit and planning long-term portfolio outcomes.',
+    items: [
+      { done: false, text: 'Guide: The BRRRR strategy adapted for condos' },
+      { done: false, text: 'Article: Using equity in your condo portfolio to fund the next purchase' },
+      { done: false, text: 'Guide: 1031 exchanges for condo investors — step-by-step' },
+      { done: false, text: 'Article: Short-term rental (Airbnb/VRBO) vs. long-term rental — pros & cons' },
+      { done: false, text: 'Guide: Building a condo portfolio across multiple markets' },
+      { done: false, text: 'Article: Timing your exit — when and how to sell a condo investment' },
+      { done: false, text: 'Guide: Legacy planning — transferring your portfolio to heirs' },
+    ],
+    ideas: [
+      'Portfolio dashboard template (track multiple units)',
+      'Case study: Growing from 1 to 10 condo units in 5 years',
+      'Interview series: "Condo Portfolio Success Stories"',
+    ],
+  },
+  {
+    id: 'phase-6',
+    number: '06',
+    title: 'Community & Advanced Resources',
+    status: 'future',
+    badge: 'Future',
+    description: 'Build the CondoMaven community and provide advanced tools and resources for experienced investors.',
+    items: [
+      { done: false, text: 'Launch community forum or Discord server' },
+      { done: false, text: 'Create curated resource library (books, podcasts, tools)' },
+      { done: false, text: 'Build searchable deal analysis archive' },
+      { done: false, text: 'Launch "Ask an Expert" Q&A feature' },
+      { done: false, text: 'Add local market guides for top condo investment cities' },
+      { done: false, text: 'Develop advanced portfolio analytics dashboard' },
+    ],
+    ideas: [
+      'Annual "State of Condo Investing" report',
+      'Partner with HOA management software providers',
+      'Mobile app for portfolio tracking',
+    ],
+  },
+];
+
+const statusColors: Record<string, string> = {
+  'in-progress': 'badge-gold',
+  'planned': 'badge-navy',
+  'future': 'badge-green',
+};
+---
+
+<Layout
+  title="Roadmap"
+  description="The CondoMaven project roadmap — phases of content and features planned for the condo investment resource."
+>
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <span class="badge badge-gold">Development Roadmap</span>
+      <h1>Project Roadmap</h1>
+      <p>
+        CondoMaven is a living resource. This roadmap outlines the content phases and features
+        we're building out — from foundational guides to advanced portfolio tools.
+      </p>
+      <div class="hero-meta">
+        <span>🗓 Last updated: March 2025</span>
+        <span class="dot">·</span>
+        <span>6 phases planned</span>
+        <span class="dot">·</span>
+        <span>Sprint 1 in progress</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <section class="section" style="padding-bottom: 0;">
+    <div class="container">
+      <div class="legend">
+        <span class="legend__label">Status key:</span>
+        <span class="badge badge-gold">In Progress</span>
+        <span class="badge badge-navy">Planned</span>
+        <span class="badge badge-green">Future</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap Phases -->
+  <section class="section">
+    <div class="container">
+      <div class="phases">
+        {phases.map((phase) => (
+          <div class="phase" id={phase.id}>
+            <div class="phase__header">
+              <div class="phase__num">{phase.number}</div>
+              <div class="phase__meta">
+                <span class={`badge ${statusColors[phase.status]}`}>{phase.badge}</span>
+                <h2 class="phase__title">{phase.title}</h2>
+                <p class="phase__desc">{phase.description}</p>
+              </div>
+            </div>
+
+            <div class="phase__body">
+              <div class="phase__tasks">
+                <h4 class="phase__section-heading">📋 Content &amp; Feature Tasks</h4>
+                <ul class="task-list">
+                  {phase.items.map((item) => (
+                    <li class={`task-list__item ${item.done ? 'task-list__item--done' : ''}`}>
+                      <span class="task-list__check">{item.done ? '✅' : '⬜'}</span>
+                      <span class="task-list__text">{item.text}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="phase__ideas">
+                <h4 class="phase__section-heading">💡 Ideas &amp; Enhancements</h4>
+                <ul class="idea-list">
+                  {phase.ideas.map((idea) => (
+                    <li>{idea}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contribution callout -->
+  <section class="section section--alt">
+    <div class="container text-center">
+      <h2>Have Ideas or Feedback?</h2>
+      <p class="text-muted" style="max-width: 540px; margin: 0 auto 1.5rem;">
+        CondoMaven is built to serve its readers. If you have a topic you'd like covered,
+        a question that isn't answered yet, or feedback on existing content, reach out.
+        Your input directly shapes this roadmap.
+      </p>
+      <a href="/faq" class="btn btn-primary">Go to the FAQ →</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+  }
+
+  .dot {
+    color: rgba(255,255,255,0.3);
+  }
+
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .legend__label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  /* ===== Phases ===== */
+  .phases {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .phase {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    transition: box-shadow 0.25s;
+  }
+
+  .phase:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .phase__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    background: linear-gradient(to right, rgba(13,43,69,0.03), transparent);
+  }
+
+  .phase__num {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(13,43,69,0.12);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 70px;
+  }
+
+  .phase__meta .badge {
+    margin-bottom: 0.6rem;
+    display: inline-block;
+  }
+
+  .phase__title {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .phase__desc {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .phase__body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .phase__tasks {
+    padding: 1.75rem 2rem;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .phase__ideas {
+    padding: 1.75rem 2rem;
+    background: rgba(201,168,76,0.03);
+  }
+
+  .phase__section-heading {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  /* Task list */
+  .task-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .task-list__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--color-text);
+  }
+
+  .task-list__item--done .task-list__text {
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+  }
+
+  .task-list__check {
+    flex-shrink: 0;
+    font-size: 0.9rem;
+  }
+
+  /* Idea list */
+  .idea-list {
+    padding-left: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  .idea-list li::marker {
+    color: var(--color-gold);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .phase__header {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .phase__num {
+      font-size: 2rem;
+    }
+
+    .phase__body {
+      grid-template-columns: 1fr;
+    }
+
+    .phase__tasks {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+    }
+  }
+</style>
