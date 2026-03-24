@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout
@@ -18,8 +19,8 @@ import Layout from '../layouts/Layout.astro';
         starting with zero experience.
       </p>
       <div class="hero__cta">
-        <a href="/roadmap" class="btn btn-primary">View the Roadmap →</a>
-        <a href="/faq" class="btn btn-outline">Explore the FAQ</a>
+        <a href={`${base}/roadmap`} class="btn btn-primary">View the Roadmap →</a>
+        <a href={`${base}/faq`} class="btn btn-outline">Explore the FAQ</a>
       </div>
     </div>
     <div class="hero__scroll-hint" aria-hidden="true">↓</div>
@@ -210,13 +211,13 @@ import Layout from '../layouts/Layout.astro';
         to tackle the questions every new condo investor faces.
       </p>
       <div class="cta-cards">
-        <a href="/roadmap" class="cta-card">
+        <a href={`${base}/roadmap`} class="cta-card">
           <div class="cta-card__icon">🗺️</div>
           <h3>Project Roadmap</h3>
           <p>See the development plan and upcoming content milestones for CondoMaven.</p>
           <span class="cta-card__link">Explore the Roadmap →</span>
         </a>
-        <a href="/faq" class="cta-card">
+        <a href={`${base}/faq`} class="cta-card">
           <div class="cta-card__icon">❓</div>
           <h3>Investor FAQ</h3>
           <p>Get answers to the most common questions new condo investors ask before getting started.</p>
