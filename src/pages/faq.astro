@@ -1,0 +1,385 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const categories = [
+  {
+    id: 'getting-started',
+    icon: '🚀',
+    title: 'Getting Started',
+    questions: [
+      {
+        q: 'What exactly is a condominium, and how does it differ from other investment properties?',
+        a: `A condominium (condo) is a form of real estate ownership where you own the interior of a specific unit outright, while sharing ownership of common areas (lobbies, hallways, gyms, pools, parking structures) with other owners through a Homeowners Association (HOA). This is different from a single-family home where you own the structure and land entirely, or an apartment building where you own the whole structure. For investors, the key distinction is that a condo comes with HOA fees, rules, and governance that affect how you use and manage the property — but it also means much of the exterior maintenance is handled for you.`,
+      },
+      {
+        q: 'Do I need experience in real estate to start investing in condos?',
+        a: `No — condos are often considered one of the best entry points for first-time real estate investors precisely because of their lower price points and reduced maintenance burden (the HOA handles exteriors). That said, there is a learning curve around understanding HOA finances, condo-specific financing requirements, and local rental laws. CondoMaven is built to walk you through all of this, step by step, so that you can make informed decisions from day one.`,
+      },
+      {
+        q: 'How much money do I need to get started?',
+        a: `Down payment requirements for investment condos are typically higher than for a primary residence. Conventional lenders often require 15–25% down for a non-owner-occupied condo, depending on the project and lender. On top of that, plan for closing costs (2–5% of purchase price), reserves for 3–6 months of expenses, and an immediate capital expenditure (CapEx) budget for any necessary improvements. As a rough rule of thumb, budget for 30–35% of the purchase price as total out-of-pocket to acquire and stabilize your first unit comfortably.`,
+      },
+      {
+        q: 'Why should I consider condos instead of single-family homes or multi-family properties?',
+        a: `Each property type has advantages. Condos shine when you want: (1) lower acquisition cost in high-demand urban markets, (2) reduced exterior maintenance responsibility, (3) built-in amenities that attract quality tenants, and (4) the ability to invest in neighborhoods you couldn't afford with a single-family home. The trade-off is HOA fees and rules that limit your control. Multi-family properties offer better economies of scale but require more capital. Condos are the ideal starting point for investors building gradually.`,
+      },
+    ],
+  },
+  {
+    id: 'financing',
+    icon: '💰',
+    title: 'Financing',
+    questions: [
+      {
+        q: 'Can I get a conventional mortgage for an investment condo?',
+        a: `Yes, but it's more complex than financing a primary residence. Lenders evaluate both you (credit score, debt-to-income ratio, reserves) and the condo project itself. The project must meet agency guidelines: typically fewer than 15–20% of units can be investor-owned (called "investor concentration limits"), the building must have adequate insurance, and the HOA must be financially solvent. Fannie Mae and Freddie Mac have published condo questionnaire requirements that your lender will use. If the project doesn't meet agency guidelines, you may need a portfolio loan from a local bank.`,
+      },
+      {
+        q: 'What is a "warrantable" vs. "non-warrantable" condo, and why does it matter?',
+        a: `A "warrantable" condo meets Fannie Mae/Freddie Mac guidelines, making it eligible for conventional financing — typically the lowest interest rates and most accessible loan terms. A "non-warrantable" condo fails one or more of these guidelines (e.g., too many investor-owned units, too many units owned by a single entity, an HOA with pending litigation, or new construction with too few units sold). For non-warrantable condos, you'll need a portfolio lender who keeps the loan in-house, usually at a higher rate. Always ask your lender about warrantability before falling in love with a unit.`,
+      },
+      {
+        q: 'Should I get pre-approved before searching for condos?',
+        a: `Absolutely. Pre-approval is essential for several reasons: it tells you your exact buying power, it makes your offers competitive (sellers take pre-approved buyers more seriously), and it helps you identify warrantability constraints early. Talk to at least two lenders — your primary bank and a mortgage broker who specializes in investment properties. They may access very different loan products. Note that pre-approval letters typically expire in 60–90 days, so time your search accordingly.`,
+      },
+      {
+        q: 'What is a DSCR loan, and is it a good fit for condo investing?',
+        a: `A Debt Service Coverage Ratio (DSCR) loan qualifies you based on the property's rental income rather than your personal income. Lenders typically want a DSCR of 1.0–1.25 (meaning rent covers at least 100–125% of the mortgage payment). These loans are offered by non-QM (non-qualified mortgage) lenders and are popular with investors who are self-employed or who own multiple properties. The trade-off is a higher interest rate (usually 0.5–1.5% above conventional rates). For a strong cash-flowing condo in a solid rental market, DSCR loans can be an excellent tool.`,
+      },
+    ],
+  },
+  {
+    id: 'due-diligence',
+    icon: '📋',
+    title: 'Due Diligence',
+    questions: [
+      {
+        q: 'What documents should I review before buying a condo investment?',
+        a: `You should review: (1) the Condo Declaration (CC&Rs) — governing rules for ownership and use; (2) HOA Bylaws — operational rules for the association; (3) Current Budget and last 2 years of financial statements — check for adequate reserves and operating surpluses; (4) Reserve Fund Study — a professional assessment of long-term capital needs; (5) Last 12–24 months of HOA meeting minutes — look for ongoing disputes, deferred maintenance, or pending special assessments; (6) HOA insurance certificate — ensure adequate coverage; (7) Pending litigation disclosure. Many states require sellers to provide a "resale certificate" or "condo disclosure package" containing these documents.`,
+      },
+      {
+        q: 'What is a reserve fund, and how do I evaluate if it\'s adequate?',
+        a: `A reserve fund is money set aside by the HOA for future major repairs and replacements (roof, elevators, parking structure, pool, HVAC, etc.). An underfunded reserve is a red flag — it often leads to special assessments (one-time charges to all owners). To evaluate adequacy, look at the "percent funded" metric from the reserve study: 70%+ is generally considered healthy, 30–70% is moderate risk, and below 30% is a serious warning sign. Also review the reserve study to understand what major expenses are coming in the next 5–10 years and whether the current funding plan covers them.`,
+      },
+      {
+        q: 'What are special assessments, and how do I protect myself from surprise costs?',
+        a: `A special assessment is an additional charge levied by the HOA on all unit owners to cover costs not covered by regular HOA fees — typically large unexpected repairs or reserve fund shortfalls. To protect yourself: (1) Review the reserve study and percent funded before buying; (2) Ask about any known or pending special assessments in the seller's disclosure; (3) Budget a CapEx reserve of 5–10% of annual rent for your own unit's maintenance; (4) Check meeting minutes for discussions of deferred maintenance. Some investors negotiate for the seller to pay any pending assessments at closing.`,
+      },
+      {
+        q: 'Can I rent out my condo unit after I buy it?',
+        a: `It depends on the condo's governing documents. Many condo associations have rental restrictions — some ban short-term rentals (Airbnb/VRBO), some cap the percentage of units that can be rented at any time, some require HOA approval of tenants, and a few ban all renting for a period after purchase. Review the CC&Rs and HOA rules carefully before buying, especially if your investment strategy depends on rental income. Rental restrictions can also affect financing (high investor concentration reduces warrantability), so it's a multi-layered consideration.`,
+      },
+    ],
+  },
+  {
+    id: 'management',
+    icon: '🔑',
+    title: 'Tenant Management',
+    questions: [
+      {
+        q: 'Should I self-manage my condo rental or hire a property manager?',
+        a: `Self-management saves 8–12% of monthly rent in management fees, but requires your time and local presence. It's practical if you live near the property, have a small portfolio, and enjoy the operational side of landlording. Property managers make sense when you're out-of-state, managing multiple units, or prefer a hands-off approach. For a condo specifically, the HOA handles many exterior issues, which simplifies management compared to a single-family home — making self-management more feasible for a single unit. As your portfolio grows, the time savings of professional management typically outweigh the cost.`,
+      },
+      {
+        q: 'How do I set the right rental price for my condo?',
+        a: `Start with a comparative market analysis (CMA) for rentals: find 3–5 similar condos that have rented in your building or neighborhood in the last 60–90 days. Adjust for square footage, floor level, view, parking, storage, and amenities. Use platforms like Zillow Rental Manager, Rentometer, and CoStar (if available) for data. Don't over-price — vacancy is far more costly than a slightly lower rent. A good rule of thumb: price at or 2–3% below the market median to minimize vacancy. Review pricing every 12 months at lease renewal.`,
+      },
+      {
+        q: 'What should a condo lease addendum include for HOA rules?',
+        a: `A condo lease addendum should inform your tenant of all relevant HOA rules and make them responsible for compliance. Key items: noise and quiet hour policies, pet restrictions and fees, parking assignments and guest parking rules, pool/gym/amenity usage hours and rules, move-in/move-out procedures (many HOAs require advance notice and elevator reservations), trash and recycling policies, and the process for submitting maintenance requests to the HOA. Include a statement that violations of HOA rules may be grounds for lease termination. Attach a copy of the relevant HOA rules as an exhibit.`,
+      },
+      {
+        q: 'What are common mistakes first-time condo landlords make?',
+        a: `The most common mistakes are: (1) Skipping tenant screening — always check credit, income (aim for 3x rent), rental history, and references; (2) Underpricing the security deposit — charge the legal maximum allowed in your state; (3) Ignoring HOA rental approval requirements — failing to get approval can create costly disputes; (4) Not doing a thorough move-in inspection with photos/video; (5) Underestimating HOA fee increases when projecting cash flow; (6) Not building a vacancy buffer into your financial projections (budget 5–8% vacancy rate); (7) Neglecting to review the HOA's annual budget increases, which compress your margins over time.`,
+      },
+    ],
+  },
+  {
+    id: 'hoa',
+    icon: '🏢',
+    title: 'HOA & Governance',
+    questions: [
+      {
+        q: 'How does the HOA affect my investment?',
+        a: `The HOA has enormous influence over your investment. It controls: monthly fees (which directly impact your cash flow), rules on rentals, renovations, and behavior, the financial health of the building (reserve funds, special assessments), and the quality of common areas that attract or repel tenants. A well-run HOA with healthy reserves and professional management is a major asset; a poorly-run HOA is a serious liability. Attend HOA meetings when you can, vote in board elections, and consider serving on the board to protect your investment interests.`,
+      },
+      {
+        q: 'What are typical HOA fees, and what do they cover?',
+        a: `HOA fees vary widely — from $150/month for a small, low-amenity condo complex to $1,500+/month for a luxury high-rise. Fees typically cover: exterior building insurance, exterior maintenance and landscaping, common utilities (water, trash, exterior lighting), amenity upkeep (pool, gym, concierge), professional management fees, and reserve fund contributions. When underwriting a deal, always verify exactly what the HOA covers — especially whether utilities like water/sewer are included — as this directly affects your net operating income (NOI) calculation.`,
+      },
+      {
+        q: 'What HOA red flags should I watch out for before buying?',
+        a: `Key red flags include: (1) Reserve fund funded below 30%; (2) Recent or pending special assessments; (3) HOA involved in active litigation; (4) High owner delinquency rates on HOA dues (>15% is concerning); (5) A history of frequent fee increases above inflation; (6) No professional management company (self-managed associations vary widely in quality); (7) Pending or deferred major repairs visible in meeting minutes; (8) A single entity owning more than 10–15% of units; (9) More than 50% investor-owned units (affects warrantability and building community); (10) Overly restrictive rules that limit your rental options.`,
+      },
+    ],
+  },
+  {
+    id: 'portfolio',
+    icon: '📈',
+    title: 'Portfolio Growth',
+    questions: [
+      {
+        q: 'How do I grow from owning one condo to a full portfolio?',
+        a: `The most common path is to: (1) Stabilize and optimize your first unit — get it rented at market rate, build reserves, and understand the cash flow; (2) Build equity through appreciation and mortgage paydown; (3) Use a cash-out refinance or HELOC to pull equity out of the first unit to fund the next down payment; (4) Repeat while managing leverage carefully. Some investors prefer the BRRRR strategy (Buy, Rehab, Rent, Refinance, Repeat), which works well with condos in need of cosmetic updates. Diversifying across buildings and markets reduces concentration risk.`,
+      },
+      {
+        q: 'What is a 1031 exchange, and can condo investors use it?',
+        a: `A 1031 exchange (named for IRS Section 1031) allows you to defer capital gains tax when you sell an investment property by reinvesting the proceeds into a "like-kind" property within a specific timeframe (45 days to identify a replacement, 180 days to close). Investment condos qualify. The key rules: the replacement property must be equal or greater in value, you must use a qualified intermediary (QI) to hold the funds, and you cannot take possession of the sales proceeds. A 1031 can be a powerful tool for trading up to larger or higher-performing condos without a tax hit — consult a CPA and 1031 exchange attorney before executing.`,
+      },
+      {
+        q: 'What key metrics should I track for each unit in my portfolio?',
+        a: `Track these for each unit: Gross Rental Income, Vacancy Rate, Net Operating Income (NOI = gross income - operating expenses, before debt service), Cash-on-Cash Return (annual pre-tax cash flow ÷ total cash invested), Cap Rate (NOI ÷ property value), and Total Return (cash flow + appreciation + principal paydown). Also track HOA fee trends over time, CapEx spending, and tenant turnover rate. A simple spreadsheet per unit, updated monthly, is sufficient to start. As your portfolio grows, tools like Stessa (free) or DoorLoop can automate much of this tracking.`,
+      },
+    ],
+  },
+];
+---
+
+<Layout
+  title="FAQ"
+  description="Frequently asked questions for first-time condo investors — financing, due diligence, HOA governance, tenant management, and portfolio growth."
+>
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <span class="badge badge-gold">Investor FAQ</span>
+      <h1>Frequently Asked Questions</h1>
+      <p>
+        Real answers to the questions every new condo investor asks — and the ones they don't know
+        to ask yet. This FAQ grows with the site.
+      </p>
+    </div>
+  </div>
+
+  <!-- Category Nav -->
+  <div class="cat-nav">
+    <div class="container">
+      <div class="cat-nav__inner">
+        <span class="cat-nav__label">Jump to:</span>
+        {categories.map(cat => (
+          <a href={`#${cat.id}`} class="cat-nav__link">
+            <span>{cat.icon}</span> {cat.title}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Sections -->
+  <section class="section">
+    <div class="container faq-container">
+      {categories.map((cat) => (
+        <div class="faq-category" id={cat.id}>
+          <div class="faq-category__header">
+            <span class="faq-category__icon">{cat.icon}</span>
+            <h2 class="faq-category__title">{cat.title}</h2>
+          </div>
+          <div class="faq-list">
+            {cat.questions.map((item, idx) => (
+              <details class="faq-item" name={`faq-${cat.id}`}>
+                <summary class="faq-item__question">
+                  <span class="faq-item__num">{String(idx + 1).padStart(2, '0')}</span>
+                  <span class="faq-item__text">{item.q}</span>
+                  <span class="faq-item__icon" aria-hidden="true">+</span>
+                </summary>
+                <div class="faq-item__answer">
+                  <p>{item.a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Suggest a question -->
+  <section class="section section--alt">
+    <div class="container text-center">
+      <h2>Have a Question We Haven't Answered?</h2>
+      <p class="text-muted" style="max-width: 520px; margin: 0 auto 1.5rem;">
+        CondoMaven's FAQ is a living document, expanded every sprint. If you have a question
+        you'd like answered, check back soon — or explore the roadmap to see what's coming next.
+      </p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="/roadmap" class="btn btn-primary">View the Roadmap →</a>
+        <a href="/" class="btn" style="border:2px solid var(--color-border); color:var(--color-navy);">← Back to Home</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Category nav */
+  .cat-nav {
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 68px;
+    z-index: 90;
+  }
+
+  .cat-nav__inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-wrap: wrap;
+  }
+
+  .cat-nav__inner::-webkit-scrollbar { display: none; }
+
+  .cat-nav__label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-right: 0.25rem;
+  }
+
+  .cat-nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text);
+    white-space: nowrap;
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+
+  .cat-nav__link:hover {
+    background: var(--color-navy);
+    border-color: var(--color-navy);
+    color: var(--color-white);
+  }
+
+  /* FAQ container */
+  .faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  /* Category section */
+  .faq-category__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--color-gold);
+  }
+
+  .faq-category__icon {
+    font-size: 1.75rem;
+  }
+
+  .faq-category__title {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  /* FAQ items */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faq-item {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .faq-item:hover {
+    box-shadow: var(--shadow-sm);
+  }
+
+  .faq-item[open] {
+    box-shadow: var(--shadow-sm);
+    border-color: rgba(201,168,76,0.4);
+  }
+
+  .faq-item__question {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    color: var(--color-navy);
+    line-height: 1.5;
+    transition: background 0.2s;
+  }
+
+  .faq-item__question::-webkit-details-marker { display: none; }
+
+  .faq-item__question:hover {
+    background: var(--color-cream);
+  }
+
+  .faq-item[open] .faq-item__question {
+    background: rgba(201,168,76,0.06);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-item__num {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--color-gold);
+    flex-shrink: 0;
+    line-height: 1.5;
+  }
+
+  .faq-item__text {
+    flex: 1;
+    font-size: 1rem;
+  }
+
+  .faq-item__icon {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+    margin-top: 0.1rem;
+  }
+
+  .faq-item[open] .faq-item__icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-item__answer {
+    padding: 1.25rem 1.5rem 1.25rem calc(1rem + 1.5rem + 1rem);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  .faq-item__answer p {
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .faq-item__answer {
+      padding-left: 1.5rem;
+    }
+
+    .cat-nav {
+      top: 0;
+    }
+  }
+</style>
