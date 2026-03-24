@@ -1,0 +1,922 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const whyCondos = [
+  {
+    icon: '💵',
+    heading: 'Lower Entry Price Point',
+    detail: 'Condominiums are typically priced below single-family homes in the same neighborhood, making them an accessible first step into real estate investing without requiring enormous capital reserves.',
+  },
+  {
+    icon: '🔧',
+    heading: 'Reduced Maintenance Burden',
+    detail: 'The Homeowners Association (HOA) manages the exterior, common areas, landscaping, and often major building systems. As an investor, you focus on what\'s inside your unit — not the roof or the parking lot.',
+  },
+  {
+    icon: '🏙️',
+    heading: 'Strong Urban Rental Demand',
+    detail: 'Condos are concentrated in walkable, transit-accessible urban neighborhoods — exactly where high-quality tenants (young professionals, remote workers, downsizers) want to live.',
+  },
+  {
+    icon: '📊',
+    heading: 'Portfolio Scalability',
+    detail: 'Because individual units cost less than houses, you can diversify across multiple buildings, cities, or markets with the same capital that might only buy one single-family home.',
+  },
+  {
+    icon: '🌐',
+    heading: 'Geographic Diversification',
+    detail: 'Lower per-unit costs enable you to hold units in different cities and economic regions, reducing concentration risk if one local market softens.',
+  },
+  {
+    icon: '📈',
+    heading: 'Long-Term Appreciation',
+    detail: 'Well-located urban condos in high-demand cities have historically appreciated strongly over multi-decade horizons, building equity alongside cash flow.',
+  },
+];
+
+const keyTerms = [
+  { term: 'HOA (Homeowners Association)', definition: 'The governing body responsible for managing common areas, enforcing community rules, and collecting dues. Every condo has one. Understanding the HOA is non-negotiable before you buy.' },
+  { term: 'HOA Dues', definition: 'Monthly fees paid by unit owners to cover building maintenance, amenities, insurance, and reserves. Can range from under $200 to over $2,000/month depending on the building.' },
+  { term: 'Special Assessment', definition: 'A one-time charge levied by the HOA when reserves are insufficient to cover a major repair or capital project. Can run from a few hundred to tens of thousands of dollars per unit.' },
+  { term: 'Reserve Fund', definition: 'Money set aside by the HOA to fund future major repairs and replacements (roofs, elevators, plumbing, etc.). A healthy reserve fund is one of the most important indicators of a building\'s financial health.' },
+  { term: 'Reserve Study', definition: 'A professional assessment of the building\'s major components, their remaining useful life, and the funding level needed to replace them on schedule. Request this document before closing.' },
+  { term: 'Warrantability', definition: 'Whether a condo project meets Fannie Mae and Freddie Mac\'s lending guidelines, making conventional mortgage financing available for buyers. Non-warrantable buildings dramatically limit your resale market.' },
+  { term: 'CC&Rs (Covenants, Conditions & Restrictions)', definition: 'The legal document that governs what owners can and cannot do with their units. Includes rental restrictions, pet policies, renovation rules, and more.' },
+  { term: 'Condo Declaration', definition: 'The founding legal document that establishes the condominium, defines unit boundaries, describes common elements, and outlines owner rights and responsibilities.' },
+  { term: 'Cap Rate', definition: 'Net Operating Income divided by purchase price. A key metric for comparing investment property returns independent of financing.' },
+  { term: 'Cash-on-Cash Return', definition: 'Annual pre-tax cash flow divided by total cash invested. Measures the actual cash yield on your invested dollars after accounting for mortgage payments.' },
+];
+
+const dueDiligenceSteps = [
+  {
+    step: '01',
+    title: 'Review HOA Financial Statements',
+    desc: 'Request the most recent HOA budget, income statement, and balance sheet. Look for a healthy reserve fund (ideally funded at 70%+ of the reserve study target), low delinquency rates among unit owners, and no operating deficits.',
+  },
+  {
+    step: '02',
+    title: 'Read the Reserve Study',
+    desc: 'Ask for the most recent reserve study. Check when major building systems (roof, elevators, HVAC, plumbing) are due for replacement and whether the current reserve funding will cover those costs — or leave a gap that triggers a special assessment.',
+  },
+  {
+    step: '03',
+    title: 'Audit Board Meeting Minutes',
+    desc: 'Request 12–24 months of HOA board meeting minutes. These documents reveal pending litigation, unresolved structural issues, owner disputes, planned assessments, and management problems long before they become official crises.',
+  },
+  {
+    step: '04',
+    title: 'Verify Warrantability Status',
+    desc: 'Have your lender check whether the building is Fannie Mae / Freddie Mac eligible before making an offer. Non-warrantable buildings restrict your buyer pool to cash buyers and portfolio-loan borrowers when you eventually sell.',
+  },
+  {
+    step: '05',
+    title: 'Check Rental Restrictions',
+    desc: 'Read the CC&Rs carefully. Determine the current investor-to-owner-occupant ratio, whether a rental cap exists, how many rentals are permitted, and whether you\'d be on a waitlist before you could lease the unit.',
+  },
+  {
+    step: '06',
+    title: 'Inspect HOA Insurance Coverage',
+    desc: 'Verify that the building carries adequate hazard, liability, and (where applicable) flood insurance. Gaps in building coverage can create expensive problems when damage occurs, and may affect warrantability.',
+  },
+  {
+    step: '07',
+    title: 'Run the Numbers Independently',
+    desc: 'Calculate your own cash-on-cash return and cap rate using realistic rental income estimates, vacancy assumptions (plan for 5–10%), HOA dues, taxes, insurance, and maintenance. Never rely on a seller\'s projected numbers.',
+  },
+];
+
+const commonMistakes = [
+  {
+    icon: '❌',
+    mistake: 'Ignoring the HOA\'s financial health',
+    fix: 'Treat HOA finances like a business investment. An underfunded reserve or a building in litigation can cost you more than a bad rental market.',
+  },
+  {
+    icon: '❌',
+    mistake: 'Skipping the rental restriction review',
+    fix: 'Some buildings prohibit new rentals for 1–2 years after purchase, or cap total investor-owned units at 20–30%. Always verify before buying with rental intent.',
+  },
+  {
+    icon: '❌',
+    mistake: 'Using gross rent to estimate returns',
+    fix: 'Always build a full pro forma: subtract vacancy, HOA dues, taxes, insurance, management fees, and maintenance from gross rent before evaluating a deal.',
+  },
+  {
+    icon: '❌',
+    mistake: 'Assuming the building is warrantable',
+    fix: 'Have your lender confirm warrantability before you fall in love with a unit. A non-warrantable building limits your future sale to a much smaller pool of buyers.',
+  },
+  {
+    icon: '❌',
+    mistake: 'Not talking to current residents',
+    fix: 'Spend time in the common areas and speak with neighbors. Residents know about pending issues, management problems, and building culture that won\'t appear in any document.',
+  },
+  {
+    icon: '❌',
+    mistake: 'Underestimating HOA fee increases',
+    fix: 'HOA dues can and do increase — sometimes dramatically after a reserve study reveals underfunding. Model a 5–10% annual increase in your long-term cash flow projections.',
+  },
+];
+---
+
+<Layout
+  title="Introduction to Condo Investing"
+  description="A complete beginner's guide to condo investing — covering why condos make compelling investments, key terminology, how to evaluate a deal, due diligence steps, and the most common mistakes first-time investors make."
+>
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <div class="article-meta">
+        <span class="badge badge-gold">Beginner's Guide</span>
+        <span class="meta-sep">·</span>
+        <span class="meta-text">Foundation</span>
+        <span class="meta-sep">·</span>
+        <span class="meta-text">Phase 1</span>
+      </div>
+      <h1>Introduction to Condo Investing:<br /><span class="text-gold">Everything You Need to Know Before You Buy</span></h1>
+      <p>
+        A practical, jargon-free primer on why condominiums make compelling investment properties,
+        how to evaluate a deal, and the critical mistakes every first-time investor must avoid.
+      </p>
+      <div class="hero-disclaimer">
+        <strong>Educational Disclaimer:</strong> This guide is for informational and educational
+        purposes only. Nothing here constitutes financial, legal, or investment advice.
+        Always consult qualified professionals before making investment decisions.
+      </div>
+    </div>
+  </div>
+
+  <article class="article-body section">
+    <div class="container article-container">
+
+      <!-- Table of Contents -->
+      <nav class="toc">
+        <h4 class="toc__heading">📑 In This Guide</h4>
+        <ol class="toc__list">
+          <li><a href="#what-is-a-condo">What Is a Condominium Investment?</a></li>
+          <li><a href="#why-condos">Why Condos Make Compelling Investments</a></li>
+          <li><a href="#key-terms">Essential Terminology You Must Know</a></li>
+          <li><a href="#how-condos-differ">How Condos Differ from Other Real Estate</a></li>
+          <li><a href="#evaluating-a-deal">How to Evaluate a Condo Investment Deal</a></li>
+          <li><a href="#due-diligence">The Due Diligence Checklist</a></li>
+          <li><a href="#common-mistakes">Common First-Timer Mistakes (and How to Avoid Them)</a></li>
+          <li><a href="#next-steps">Your Next Steps</a></li>
+        </ol>
+      </nav>
+
+      <!-- Section 1 -->
+      <h2 id="what-is-a-condo">What Is a Condominium Investment?</h2>
+      <p>
+        A condominium (condo) is a form of real estate ownership in which an individual owns a
+        specific unit within a larger building or community, while sharing ownership of common
+        areas — lobbies, hallways, pools, gyms, rooftops, and parking structures — with the
+        other unit owners.
+      </p>
+      <p>
+        Unlike an apartment, which is rented from a landlord who owns the entire building, a
+        condo is individually owned. This makes condos legally and financially more similar to a
+        single-family home than to a rental apartment, even though the physical structure is shared.
+      </p>
+      <p>
+        When you invest in a condo, you are:
+      </p>
+      <ul>
+        <li>Purchasing a title to a specific unit (your "airspace" within the building)</li>
+        <li>Becoming a member of the Homeowners Association (HOA) that governs the shared property</li>
+        <li>Obligated to pay monthly HOA dues that fund the building's ongoing operations and reserves</li>
+        <li>Subject to the HOA's governing documents, which may include rental restrictions, renovation rules, and pet policies</li>
+      </ul>
+      <p>
+        As an investment, a condo works the same way as any rental property: you purchase it,
+        lease it to a tenant, collect rent, pay your expenses (mortgage, HOA dues, taxes,
+        insurance), and keep the difference as cash flow — while the property (ideally)
+        appreciates in value over time.
+      </p>
+
+      <div class="article-callout article-callout--info">
+        <div class="article-callout__icon">💡</div>
+        <div>
+          <strong>The Key Distinction</strong>
+          <p>When you own a condo, you don't just own your unit — you're also a shareholder in the collective health of the entire building. A poorly managed HOA, underfunded reserves, or a structural crisis in the building affects <em>every</em> unit owner, regardless of how well-maintained your specific unit is. This collective ownership structure is both the greatest advantage and the greatest risk of condo investing.</p>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <h2 id="why-condos">Why Condos Make Compelling Investments</h2>
+      <p>
+        Condominiums have a unique risk/return profile that makes them particularly well-suited
+        for first-time real estate investors, investors seeking urban exposure, and those looking
+        to build a diversified portfolio with limited capital.
+      </p>
+      <div class="why-grid">
+        {whyCondos.map((item) => (
+          <div class="why-card">
+            <div class="why-card__icon">{item.icon}</div>
+            <h4>{item.heading}</h4>
+            <p>{item.detail}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Section 3 -->
+      <h2 id="key-terms">Essential Terminology You Must Know</h2>
+      <p>
+        Before you evaluate a single deal, you need to speak the language of condo investing.
+        These are the terms that appear in every document, every listing, and every conversation
+        with real estate professionals. Do not proceed without understanding all of them.
+      </p>
+      <div class="terms-grid">
+        {keyTerms.map((item) => (
+          <div class="term-card">
+            <dt class="term-card__term">{item.term}</dt>
+            <dd class="term-card__def">{item.definition}</dd>
+          </div>
+        ))}
+      </div>
+      <p>
+        For a complete reference, visit our <a href={`${base}/glossary`}>Condo Investing Glossary</a>,
+        which covers over 50 essential terms in detail.
+      </p>
+
+      <!-- Section 4 -->
+      <h2 id="how-condos-differ">How Condos Differ from Other Real Estate Investments</h2>
+      <p>
+        If you've read general real estate investing advice, most of it was written with
+        single-family homes or multi-family buildings in mind. Condos have several structural
+        differences that make generic advice incomplete — or outright dangerous.
+      </p>
+
+      <div class="compare-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Single-Family Home</th>
+              <th>Condo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="table-category">Maintenance Responsibility</td>
+              <td>You are responsible for everything — roof, foundation, landscaping, systems</td>
+              <td>HOA handles exterior and common areas; you handle your unit's interior</td>
+            </tr>
+            <tr>
+              <td class="table-category">Monthly Fixed Costs</td>
+              <td>Mortgage + taxes + insurance only</td>
+              <td>Mortgage + taxes + insurance + HOA dues (can be $200–$2,000+/month)</td>
+            </tr>
+            <tr>
+              <td class="table-category">Rental Restrictions</td>
+              <td>None (subject only to local laws)</td>
+              <td>HOA may cap investor-owned rentals, require owner occupancy, or maintain rental waitlists</td>
+            </tr>
+            <tr>
+              <td class="table-category">Financing</td>
+              <td>Standard conventional loans widely available</td>
+              <td>Building must be "warrantable" to qualify for conventional financing — many don't</td>
+            </tr>
+            <tr>
+              <td class="table-category">Resale Risk</td>
+              <td>Affected by neighborhood and your property's condition</td>
+              <td>Also affected by the entire building's financial health, warrantability, and HOA governance</td>
+            </tr>
+            <tr>
+              <td class="table-category">Special Assessments</td>
+              <td>N/A — all capital costs fall on you</td>
+              <td>HOA can levy unexpected large charges on every unit owner for building repairs</td>
+            </tr>
+            <tr>
+              <td class="table-category">Entry Price Point</td>
+              <td>Typically higher per unit in urban markets</td>
+              <td>Lower, enabling faster entry and broader geographic diversification</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="article-callout article-callout--warning">
+        <div class="article-callout__icon">⚠️</div>
+        <div>
+          <strong>The HOA Is Not Optional</strong>
+          <p>In a single-family home, you are your own HOA. In a condo, you share governance with every other unit owner in the building — including those who vote for irresponsible budgets, elect poor board members, or defer maintenance decisions. Before you invest, study the HOA as carefully as you study the unit itself. Many condo investment disasters stem from HOA governance failures, not property-level problems.</p>
+        </div>
+      </div>
+
+      <!-- Section 5 -->
+      <h2 id="evaluating-a-deal">How to Evaluate a Condo Investment Deal</h2>
+      <p>
+        Deal evaluation for condos requires two parallel analyses: the unit-level financials and
+        the building-level health. A unit with excellent cash flow projections inside a financially
+        distressed building is not a good deal — it's a trap.
+      </p>
+
+      <h3>Unit-Level Financial Analysis</h3>
+      <p>Start by building a complete pro forma for the unit itself. Use these core metrics:</p>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-card__name">Gross Rental Income</div>
+          <div class="metric-card__formula">Market rent × 12 months</div>
+          <div class="metric-card__note">Research comparable rentals in the building and nearby properties. Be conservative.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card__name">Effective Gross Income</div>
+          <div class="metric-card__formula">Gross income × (1 − vacancy rate)</div>
+          <div class="metric-card__note">Plan for 5–10% vacancy. Urban condos tend toward lower vacancy; factor in lease-up time between tenants.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card__name">Net Operating Income (NOI)</div>
+          <div class="metric-card__formula">Effective Gross Income − Operating Expenses</div>
+          <div class="metric-card__note">Operating expenses include HOA dues, property taxes, insurance, management fees (8–12%), and maintenance reserves (1–2% of value annually).</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card__name">Cap Rate</div>
+          <div class="metric-card__formula">NOI ÷ Purchase Price × 100</div>
+          <div class="metric-card__note">Useful for comparing deals independent of financing. Urban condo cap rates typically range from 4–7% in healthy markets.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card__name">Cash-on-Cash Return</div>
+          <div class="metric-card__formula">Annual Cash Flow ÷ Total Cash Invested × 100</div>
+          <div class="metric-card__note">Measures actual return on your invested dollars after debt service. A common first-year target is 6–10% for leveraged condo investments.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card__name">Gross Rent Multiplier (GRM)</div>
+          <div class="metric-card__formula">Purchase Price ÷ Annual Gross Rent</div>
+          <div class="metric-card__note">A quick screening tool. Lower GRM = better value, all else equal. Not a substitute for full analysis.</div>
+        </div>
+      </div>
+
+      <h3>Building-Level Health Assessment</h3>
+      <p>
+        Beyond the unit financials, you must assess the health of the building as a whole. This
+        is where most first-time condo investors skip the work — and where the biggest surprises
+        come from. Ask for and review:
+      </p>
+      <ul>
+        <li><strong>HOA financial statements</strong> (budget, income statement, balance sheet)</li>
+        <li><strong>Reserve study</strong> — current funding level vs. required funding</li>
+        <li><strong>Board meeting minutes</strong> from the last 12–24 months</li>
+        <li><strong>Current delinquency rate</strong> among unit owners on HOA dues</li>
+        <li><strong>Pending or active litigation</strong> against the HOA</li>
+        <li><strong>Insurance certificates</strong> showing adequate coverage</li>
+        <li><strong>Warrantability confirmation</strong> from your lender</li>
+        <li><strong>CC&Rs and rental restriction policies</strong></li>
+      </ul>
+
+      <!-- Section 6 -->
+      <h2 id="due-diligence">The Due Diligence Checklist</h2>
+      <p>
+        These seven steps are non-negotiable before closing on any condo investment. Skipping
+        any one of them exposes you to risks that can eliminate years of cash flow in a single event.
+      </p>
+      <div class="steps-list">
+        {dueDiligenceSteps.map((step) => (
+          <div class="step-card">
+            <div class="step-card__num">{step.step}</div>
+            <div class="step-card__content">
+              <h4>{step.title}</h4>
+              <p>{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Section 7 -->
+      <h2 id="common-mistakes">Common First-Timer Mistakes (and How to Avoid Them)</h2>
+      <p>
+        The following mistakes appear again and again among first-time condo investors. Learn from
+        those who made them before you.
+      </p>
+      <div class="mistakes-grid">
+        {commonMistakes.map((item) => (
+          <div class="mistake-card">
+            <div class="mistake-card__icon">{item.icon}</div>
+            <div class="mistake-card__content">
+              <h4 class="mistake-card__heading">{item.mistake}</h4>
+              <p class="mistake-card__fix"><strong>The fix:</strong> {item.fix}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Section 8 -->
+      <h2 id="next-steps">Your Next Steps</h2>
+      <p>
+        Now that you have a foundation in condo investing, here's how to continue building your
+        knowledge on CondoMaven:
+      </p>
+      <div class="next-steps-grid">
+        <a href={`${base}/articles/atlanta-market-crisis`} class="next-step-card">
+          <div class="next-step-card__icon">📍</div>
+          <h4>Atlanta Condo Market Crisis</h4>
+          <p>Study a real-world case of what can go wrong — and the due diligence checklist that could have prevented it.</p>
+          <span class="next-step-card__cta">Read Case Study →</span>
+        </a>
+        <a href={`${base}/glossary`} class="next-step-card">
+          <div class="next-step-card__icon">📖</div>
+          <h4>Condo Investing Glossary</h4>
+          <p>Master every term you'll encounter — from warrantability and cap rate to DSCR loans and reserve studies.</p>
+          <span class="next-step-card__cta">Browse Glossary →</span>
+        </a>
+        <a href={`${base}/faq`} class="next-step-card">
+          <div class="next-step-card__icon">❓</div>
+          <h4>Investor FAQ</h4>
+          <p>Answers to the most common questions first-time condo investors ask before making their first move.</p>
+          <span class="next-step-card__cta">Read the FAQ →</span>
+        </a>
+      </div>
+
+      <div class="article-callout article-callout--info" style="margin-top: 3rem;">
+        <div class="article-callout__icon">🗺️</div>
+        <div>
+          <strong>Follow the Full Roadmap</strong>
+          <p>This guide is Phase 1 of CondoMaven's content journey. As we publish more guides on market research, financing, tenant management, tax strategy, and portfolio scaling, you'll find them organized on the <a href={`${base}/roadmap`}>Project Roadmap</a>. Bookmark it and check back regularly.</p>
+        </div>
+      </div>
+
+    </div>
+  </article>
+</Layout>
+
+<style>
+  /* ===== Hero ===== */
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .meta-sep {
+    color: rgba(255,255,255,0.35);
+  }
+
+  .meta-text {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.9rem;
+  }
+
+  .hero-disclaimer {
+    margin-top: 1.75rem;
+    padding: 1rem 1.25rem;
+    background: rgba(255,255,255,0.08);
+    border-left: 3px solid var(--color-gold);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.75);
+    text-align: left;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ===== Article Body ===== */
+  .article-body {
+    background: var(--color-cream);
+  }
+
+  .article-container {
+    max-width: 860px;
+  }
+
+  .article-container h2 {
+    font-size: 1.65rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--color-border);
+    color: var(--color-navy);
+  }
+
+  .article-container h2:first-of-type {
+    border-top: none;
+    margin-top: 0;
+  }
+
+  .article-container h3 {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-navy);
+  }
+
+  .article-container p {
+    line-height: 1.8;
+    margin-bottom: 1.1rem;
+    color: var(--color-text);
+  }
+
+  .article-container ul,
+  .article-container ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .article-container li {
+    line-height: 1.7;
+    color: var(--color-text);
+    font-size: 0.97rem;
+  }
+
+  .article-container a {
+    color: var(--color-navy);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--color-gold);
+    text-underline-offset: 3px;
+  }
+
+  .article-container a:hover {
+    color: var(--color-gold);
+  }
+
+  /* ===== Table of Contents ===== */
+  .toc {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-gold);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .toc__heading {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.85rem;
+  }
+
+  .toc__list {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .toc__list li {
+    font-size: 0.93rem;
+  }
+
+  .toc__list a {
+    color: var(--color-navy);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .toc__list a:hover {
+    color: var(--color-gold);
+    text-decoration: underline;
+    text-decoration-color: var(--color-gold);
+  }
+
+  /* ===== Callouts ===== */
+  .article-callout {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius-md);
+    margin: 2rem 0;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .article-callout p {
+    margin: 0.4rem 0 0;
+    font-size: 0.93rem;
+  }
+
+  .article-callout--warning {
+    background: rgba(220,60,60,0.06);
+    border-left: 4px solid #dc3c3c;
+  }
+
+  .article-callout--info {
+    background: rgba(46,134,171,0.07);
+    border-left: 4px solid #2e86ab;
+  }
+
+  .article-callout__icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    padding-top: 0.1rem;
+  }
+
+  /* ===== Why Grid ===== */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .why-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .why-card__icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .why-card h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-navy);
+  }
+
+  .why-card p {
+    font-size: 0.88rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  /* ===== Terms Grid ===== */
+  .terms-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 1.5rem 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .term-card {
+    padding: 1rem 1.5rem;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .term-card:last-child {
+    border-bottom: none;
+  }
+
+  .term-card:nth-child(even) {
+    background: rgba(245,242,235,0.5);
+  }
+
+  .term-card__term {
+    font-weight: 700;
+    font-size: 0.97rem;
+    color: var(--color-navy);
+    margin-bottom: 0.3rem;
+  }
+
+  .term-card__def {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ===== Comparison Table ===== */
+  .compare-table-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-white);
+    font-size: 0.9rem;
+  }
+
+  .data-table th {
+    background: var(--color-navy);
+    color: var(--color-white);
+    padding: 0.85rem 1rem;
+    text-align: left;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .data-table td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    line-height: 1.55;
+    vertical-align: top;
+  }
+
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .data-table tr:nth-child(even) td {
+    background: rgba(245,242,235,0.5);
+  }
+
+  .table-category {
+    font-weight: 600;
+    color: var(--color-navy);
+    white-space: nowrap;
+  }
+
+  /* ===== Metrics Grid ===== */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    margin: 1.25rem 0 2rem;
+  }
+
+  .metric-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-gold);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+  }
+
+  .metric-card__name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--color-navy);
+    margin-bottom: 0.4rem;
+  }
+
+  .metric-card__formula {
+    font-family: monospace;
+    font-size: 0.85rem;
+    background: var(--color-cream);
+    padding: 0.35rem 0.6rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.6rem;
+    color: var(--color-navy);
+  }
+
+  .metric-card__note {
+    font-size: 0.83rem;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+  }
+
+  /* ===== Steps List ===== */
+  .steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .step-card {
+    display: flex;
+    gap: 1.25rem;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    align-items: flex-start;
+  }
+
+  .step-card__num {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: rgba(201,168,76,0.5);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 48px;
+  }
+
+  .step-card__content h4 {
+    font-size: 1rem;
+    color: var(--color-navy);
+    margin-bottom: 0.4rem;
+  }
+
+  .step-card__content p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  /* ===== Mistakes Grid ===== */
+  .mistakes-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .mistake-card {
+    display: flex;
+    gap: 1rem;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid #dc3c3c;
+    border-radius: var(--radius-md);
+    padding: 1.15rem 1.5rem;
+    align-items: flex-start;
+  }
+
+  .mistake-card__icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    padding-top: 0.1rem;
+  }
+
+  .mistake-card__heading {
+    font-size: 0.97rem;
+    color: var(--color-navy);
+    margin-bottom: 0.35rem;
+  }
+
+  .mistake-card__fix {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ===== Next Steps Grid ===== */
+  .next-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  .next-step-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .next-step-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-gold);
+  }
+
+  .next-step-card__icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .next-step-card h4 {
+    font-size: 1rem;
+    color: var(--color-navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .next-step-card p {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    flex-grow: 1;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .next-step-card__cta {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-navy);
+    text-decoration: none;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 640px) {
+    .why-grid,
+    .metrics-grid,
+    .next-steps-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .step-card,
+    .mistake-card {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .step-card__num {
+      font-size: 1.25rem;
+      min-width: auto;
+    }
+  }
+</style>
