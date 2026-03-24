@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
 const phases = [
   {
     id: 'phase-1',
@@ -228,7 +229,7 @@ const statusColors: Record<string, string> = {
         a question that isn't answered yet, or feedback on existing content, reach out.
         Your input directly shapes this roadmap.
       </p>
-      <a href="/faq" class="btn btn-primary">Go to the FAQ →</a>
+      <a href={`${base}/faq`} class="btn btn-primary">Go to the FAQ →</a>
     </div>
   </section>
 </Layout>
